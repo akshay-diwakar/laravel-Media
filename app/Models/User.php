@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Post;
 use App\Models\Comments;
+use App\Models\role;
 
 class User extends Authenticatable
 {
@@ -55,10 +56,13 @@ class User extends Authenticatable
         return $this->hasmany(Comments::class);
     }
 
-    public function users()
+    public function roles()
     {
-       return $this->belongsToMany(role::class);
+       return $this->belongsToMany(role::class,'users_roles');
     }
 
     
+    // public function isAdmin() {
+    //     return $this->roles()->where('name', 'Admin')->exists();
+    //  }
 }

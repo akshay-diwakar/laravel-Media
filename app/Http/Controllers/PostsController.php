@@ -8,6 +8,8 @@ use Storage;
 use Auth;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\role;
+
 
 class PostsController extends Controller
 {
@@ -15,6 +17,8 @@ class PostsController extends Controller
 
     public function index(Request $request)
     {
+        $Role = role::get();
+        $User = User::get();
         $Post = Post::get();
         // dd($Post);
         // $User_name =  $Post->User()->get('name');
@@ -34,7 +38,7 @@ class PostsController extends Controller
         // dd($Name);
         // //dd($Post);
         // $Name = user::get('name');
-        return view('Posts.index',compact('Post'));
+        return view('Posts.index',compact('Post','User','Role'));
     }
 
     public function add(Request $request)

@@ -12,7 +12,8 @@ class UserController extends Controller
 {
     public function index(Request $request)
     { 
-        
+       $this->authorize('isAdmin'); 
+      //  dd($this);
        $User = User::get();
        $Role = role::get();
     //    $UserRole = UserRole::get(); 
