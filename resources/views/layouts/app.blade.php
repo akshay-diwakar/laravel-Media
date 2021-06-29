@@ -34,8 +34,8 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         
-                        @if(Auth::User()->roles()->where('name', 'Admin')->exists())
-                        {{-- @if($User->isAdmin()) --}}
+                        @if(Auth::check() &&  Auth::user()->roles()->where('name', 'Admin')->exists())
+                      
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('/Admin/users')}}">Users</a>
                             </li>
@@ -46,7 +46,6 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('/Admin/Posts')}}">Posts</a>
                             </li> 
-                          
                         @endif
                                                 
                     </ul>

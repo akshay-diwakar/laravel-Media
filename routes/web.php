@@ -20,16 +20,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Admin Only
-Route::middleware('EnsureAdminIsLoggedIn')->prefix('admin')->group(function () {
-    // Mention all admin routes
     
-    Route::get('/users',[UserController::class,'index'])->name('User');
-});
-
 Route::prefix('/Admin')->name('Admin.')->group(function () {
-
-
+        
+    Route::get('/users',[UserController::class,'index'])->name('User');
+        
     Route::get('/',[HomeController::class,'index']);
 
     Route::group(['middleware' => 'auth'], function() {

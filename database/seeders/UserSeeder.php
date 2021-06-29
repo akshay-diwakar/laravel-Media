@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
                     'name' => 'Admin',
                     'email' => 'admin@mailinator.com',
                     'password' => bcrypt('admin123'),
+                    
                 ]
             ]);
     }

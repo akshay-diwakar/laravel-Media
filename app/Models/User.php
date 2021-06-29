@@ -10,6 +10,9 @@ use Illuminate\Notifications\Notifiable;
 use App\Models\Post;
 use App\Models\Comments;
 use App\Models\role;
+use App\Models\UserRole;
+
+
 
 class User extends Authenticatable
 {
@@ -56,10 +59,15 @@ class User extends Authenticatable
         return $this->hasmany(Comments::class);
     }
 
-    public function roles()
-    {
-       return $this->belongsToMany(role::class,'users_roles');
-    }
+     public function roles()
+     {
+         return $this->belongsToMany(role::class,'users_roles','role_id','user_id')->using(UserRole::class);
+     }
+   
+    // public function usersroles()
+    // {
+    //    return $this->belongsToMany(UserRole::class);
+    // }
 
     
 }

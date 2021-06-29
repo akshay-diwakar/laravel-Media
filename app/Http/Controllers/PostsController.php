@@ -17,28 +17,9 @@ class PostsController extends Controller
 
     public function index(Request $request)
     {
-        $Role = role::get();
-        $User = User::get();
         $Post = Post::get();
-        // dd($Post);
-        // $User_name =  $Post->User()->get('name');
-        // dd($User_name);
-        // $Posted_by = Post::with('users')->get();
-        // $Created_by = Db::table('posts')->join('users','users.id', '=' ,'posts.created_by')->value('name');
-        // $abc =  User::Find($id)->name;
-        // dd($Posts); 
-        // $Posts = DB::table('users')
-        //     ->join('contacts', 'users.id', '=', 'contacts.user_id')
-        //     ->join('orders', 'users.id', '=', 'orders.user_id')
-        //     ->select('users.*', 'contacts.phone', 'orders.price')
-        //     ->get();
-        //Find log
-        // $Post = Post::where('id', 1)->first(); 
-        // $Name = $Post->User->name;
-        // dd($Name);
-        // //dd($Post);
-        // $Name = user::get('name');
-        return view('Posts.index',compact('Post','User','Role'));
+        $User = User::get();
+        return view('Posts.index',compact('Post'));
     }
 
     public function add(Request $request)
@@ -53,9 +34,7 @@ class PostsController extends Controller
         // dd($request->Image);
 
         $User =  Auth::user()->id;
-        // dd($User);
-        // echo $data[];
-        // die();
+        
         $rules = array(
            'postname' => 'required' ,
            'description' =>'required',
@@ -69,10 +48,6 @@ class PostsController extends Controller
         }
         else{
            
-           // Generate a file name with extension
-        //    $ImageName = $request->postname . '.'.$request->Image->getClientOriginalExtension();
-            // dd($ImageName);
-        //    $request->Image->storeAs('Images', $ImageName);
            $path =   Storage::disk('local')->put('public',$request->file('Image'));
           
            $form_data = array(
