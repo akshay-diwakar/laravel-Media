@@ -63,23 +63,20 @@ class CommentsController extends Controller
     }
 
     public function update(Request $request)
-        {
+    {
         $data = $request->all();
         // dd($data);
         $Comment = Comments::find($data['Comment_id']);
         $rules = array(
             'comment' => 'required' ,
-            
-         );
+        );
 
- 
-         $validate=Validator::make($data,$rules);
+        $validate=Validator::make($data,$rules);
          
-         if ($validate->fails()) {
+        if ($validate->fails()) {
              return redirect()->back()->withInput()->withErrors($validate);
-         }
-         else{
-            
+        }
+        else{
             $form_data = array(
              'comment' => @$data['comment'] ? $data['comment'] : $Post->comment, 
             );

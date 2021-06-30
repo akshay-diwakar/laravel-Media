@@ -17,6 +17,12 @@
 @endif
 @section('content')
 <div class="container">
+  <a href=" {{ route('Admin.User.add')}} ">
+    <button class="btn btn-primary">Add Users</button> 
+  </a>
+</div>
+
+<div class="container" style="margin-top:10px;">
     <table class="table table-striped">
         <thead>
           <tr>
@@ -24,16 +30,35 @@
             <th scope="col">User Name</th>
             <th scope="col">email</th>
             <th scope="col">Role</th>
+            <th scope="col">Assign Role</th>
+
             <th scope="col">Action</th>
          </tr>
         </thead>
         <tbody>
           @foreach ($User as $Users)
               <tr>
-                  <td>{{$Users->id}}</td>
-                  <td>{{$Users->name}}</td>
-                  <td>{{$Users->email}}</td>
-
+                  <td>{{ $Users->id }}</td>
+                  <td>{{ $Users->name }}</td>
+                  <td>{{ $Users->email }}</td>
+                  <td>{{ $Users->roles }}</td>    
+                  <td>
+                     <a href="{{ route('Admin.RoleAssign.add') }}">
+                        <button class="btn btn-info">Assign Role</button>
+                     </a>
+                  </td>    
+                  <td>
+                        <a href="{{URL('/Admin/users/edit/')}}/{{$Users->id}}"> 
+                           <button class="btn btn-secondary">Edit</button>
+                        </a>
+                        <form method="POST" action="{{ route('Admin.User.delete',$Users->id) }}">
+                          @method('Delete')
+                          @csrf
+                          <button class="btn btn-danger">
+                              Delete
+                          </button>
+                      </form>
+                  </td>
               </tr>
           @endforeach
         </tbody>

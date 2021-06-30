@@ -5,6 +5,8 @@ use App\Http\Controllers\PostsController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\RoleAssignController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,11 +24,22 @@ Route::get('/', function () {
 
     
 Route::prefix('/Admin')->name('Admin.')->group(function () {
-        
-    Route::get('/users',[UserController::class,'index'])->name('User');
-        
+    
     Route::get('/',[HomeController::class,'index']);
+        
+    // users endpoint
+    Route::get('/users',[UserController::class,'index'])->name('User');
+    Route::get('/users/add',[UserController::class,'add'])->name('User.add');
+    Route::post('/users/save',[UserController::class,'store'])->name('User.save');
+    Route::get('/users/edit/{id}',[UserController::class,'edit'])->name('User.edit');
+    Route::post('/users/edit-save',[UserController::class,'update'])->name('User.edit-save');
+    Route::delete('/users/delete/{id}',[UserController::class,'destroy'])->name('User.delete');
 
+
+
+    // AssignRole EndPoints
+    Route::get('/AssignRole/add',[RoleAssignController::class,'add'])->name('RoleAssign.add');
+    
     Route::group(['middleware' => 'auth'], function() {
     
         // Route::group(['middleware' => ['EnsureAutherized'] ], function(){
