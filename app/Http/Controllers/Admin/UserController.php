@@ -6,15 +6,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\role;
-use App\Models\UserRole;
+use App\Models\RoleUser;
 use Validator;
+use DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     public function index(Request $request)
     { 
-    
        $User = User::get();
        $Role = role::get();
        return view('Admin.User.index',compact('User'));  
@@ -24,7 +24,6 @@ class UserController extends Controller
     {
       return view('Admin.User.add');
     }
-
 
     public function store(Request $request)
     {
@@ -50,7 +49,7 @@ class UserController extends Controller
 
             $User = User::create($form_data);
             // $Message = "successfully added";
-            return redirect('/Admin/user')->with('success');
+            return redirect('/Admin/users')->with('success');
         }       
     }
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddRoleidToUsersRolesTable extends Migration
+class AddRoleIdToRoleUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddRoleidToUsersRolesTable extends Migration
      */
     public function up()
     {
-        Schema::table('users_roles', function (Blueprint $table) {
+        Schema::table('role_user', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
             $table->unsignedBigInteger('role_id');
@@ -32,7 +32,7 @@ class AddRoleidToUsersRolesTable extends Migration
      */
     public function down()
     {
-        Schema::table('users_roles', function (Blueprint $table) {
+        Schema::table('role_user', function (Blueprint $table) {
             //
         });
     }

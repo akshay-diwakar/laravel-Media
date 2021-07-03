@@ -19,8 +19,8 @@
 
 <div class="container col-md-6">
     <section style="margin-top:30px;">
-        <form method="post" action="" enctype="multipart/form-data">
-          
+        <form method="post" action="{{ URL('/Admin/'. $User_id  . '/AssignRole/save') }}" enctype="multipart/form-data">
+           <input type="hidden" name="User_id" value="{{ $User_id }}"/>
           @if ($errors->any())
               <div class="alert alert-danger alert-dismissable">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -34,32 +34,23 @@
             @csrf
             <div class="form-group">
                 <label>User Name</label>
-                
-                <input type="text" class="form-control" placeholder="User Name" name="postname" readonly>
+                  <input type="text" class="form-control" placeholder="User Name" value="{{ user}}" name="rolename" readonly>
             </div>
-              <div>
+              <div >
                  <label>Roles</label>
               </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" >
-                <label class="form-check-label">Admin</label>
-              </div>
-            
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" >
-                <label class="form-check-label">User</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions"  >
-                <label class="form-check-label">Editor</label>
-              </div>
-              
+
+              @foreach ($Role as $role)
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="role" value="{{$role->id}}">
+                    <label class="form-check-label">{{$role->name}}</label>
+                </div>    
+              @endforeach
               <div style="margin-top: 5px;">
-                  <input type="submit" class="btn btn-primary " value="Submit" />
+                  <input type="submit" class="btn btn-primary" value="Submit">
               </div>
-          </form>
+        </form>
     </section>
-    
 </div>
 @endsection
 

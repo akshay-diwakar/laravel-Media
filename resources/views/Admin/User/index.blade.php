@@ -17,9 +17,13 @@
 @endif
 @section('content')
 <div class="container">
-  <a href=" {{ route('Admin.User.add')}} ">
+  <a href="{{ route('Admin.AssignPermission')}}">
+    <button class="btn btn-dark">Permission</button>
+  </a>
+  <a href="{{ route('Admin.User.add')}} ">
     <button class="btn btn-primary">Add Users</button> 
   </a>
+  
 </div>
 
 <div class="container" style="margin-top:10px;">
@@ -31,7 +35,6 @@
             <th scope="col">email</th>
             <th scope="col">Role</th>
             <th scope="col">Assign Role</th>
-
             <th scope="col">Action</th>
          </tr>
         </thead>
@@ -43,7 +46,7 @@
                   <td>{{ $Users->email }}</td>
                   <td>{{ $Users->roles }}</td>    
                   <td>
-                     <a href="{{ route('Admin.RoleAssign.add') }}">
+                     <a href="{{ url( 'Admin/' . $Users->id.'/AssignRole/add') }}">
                         <button class="btn btn-info">Assign Role</button>
                      </a>
                   </td>    

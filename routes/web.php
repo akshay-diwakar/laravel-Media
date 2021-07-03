@@ -6,6 +6,7 @@ use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\RoleAssignController;
+use App\Http\Controllers\AssignPermissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,7 @@ Route::get('/', function () {
 Route::prefix('/Admin')->name('Admin.')->group(function () {
     
     Route::get('/',[HomeController::class,'index']);
-        
+
     // users endpoint
     Route::get('/users',[UserController::class,'index'])->name('User');
     Route::get('/users/add',[UserController::class,'add'])->name('User.add');
@@ -35,11 +36,17 @@ Route::prefix('/Admin')->name('Admin.')->group(function () {
     Route::post('/users/edit-save',[UserController::class,'update'])->name('User.edit-save');
     Route::delete('/users/delete/{id}',[UserController::class,'destroy'])->name('User.delete');
 
-
-
     // AssignRole EndPoints
-    Route::get('/AssignRole/add',[RoleAssignController::class,'add'])->name('RoleAssign.add');
-    
+    Route::get('/{user_id}/AssignRole/add',[RoleAssignController::class,'add'])->name('RoleAssign.add');
+    Route::post('/{user_id}/AssignRole/save',[RoleAssignController::class,'store'])->name('RoleAssign.save');
+
+
+    // AssignPermission EndPoints
+    Route::get('/AssignPermission',[AssignPermissionController::class,'index'])->name('AssignPermission');
+    Route::get('/AssignPermission/add',[AssignPermissionController::class,'add'])->name('AssignPermission.add');
+    Route::post('/AssignPermission/save',[AssignPermissionController::class,'store'])->name('AssignPermission.save');
+
+
     Route::group(['middleware' => 'auth'], function() {
     
         // Route::group(['middleware' => ['EnsureAutherized'] ], function(){
