@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@section('content')
 
 @if(session()->has('error'))
 <div class="alert alert-danger alert-dismissable">
@@ -16,34 +15,42 @@
     &nbsp;{{ session()->get('success') }}
 </div>
 @endif
-<div class="container">
-    <a href="{{ route('Admin.AssignPermission.add') }}">
-        <button class="btn btn-primary">Add Permissions</button>
-    </a>
-</div>
-
-<div class="container">
-    <section style="margin-top:30px;">
-        <table class="table table-striped">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-              </tr>
+@section('content')
+   <div class="container" style="margin-top: 10px;">
+       <div class="container">
+           <a href="{{ route('Admin.AssignPermission.add') }}">
+               <button class="btn btn-primary">Add Permission</button>
+           </a>
+       </div>   
+            <table class="table"  style="margin-top: 20px;">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Item</th>
+                    <th scope="col">Permission</th>
+                    <th scope="col">Action</th>
+                </tr>
             </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              
-            </tbody>
-          </table>
-    </section>
-</div>
-@endsection
+                <tbody>
+                    @foreach ($RolePermission as $AssignedRole)
+                    <tr>
+                        <th scope="row">{{ $AssignedRole->id }}</th>
+                        <td>{{ $AssignedRole->roles->name }}</td>
+                        <td>{{ $AssignedRole->Item }}</td>
+                        <td>{{ $AssignedRole->Permission }}</td>
+                        <td> 
+                            <a href="">
+                                <button class="btn btn-info">Edit</button>
+                            </a>
+                            <a href="">
+                                <button class="btn btn-danger">Delete</button>
+                            </a>
+                        </td>     
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+   </div>
 
+@endsection

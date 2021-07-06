@@ -40,11 +40,10 @@ Route::prefix('/Admin')->name('Admin.')->group(function () {
     Route::get('/{user_id}/AssignRole/add',[RoleAssignController::class,'add'])->name('RoleAssign.add');
     Route::post('/{user_id}/AssignRole/save',[RoleAssignController::class,'store'])->name('RoleAssign.save');
 
-
     // AssignPermission EndPoints
     Route::get('/AssignPermission',[AssignPermissionController::class,'index'])->name('AssignPermission');
-    Route::get('/AssignPermission/add',[AssignPermissionController::class,'add'])->name('AssignPermission.add');
-    Route::post('/AssignPermission/save',[AssignPermissionController::class,'store'])->name('AssignPermission.save');
+    Route::get('/AssignPermission/Add',[AssignPermissionController::class,'add'])->name('AssignPermission.add');
+    Route::post('/AssignPermissin/save',[AssignPermissionController::class,'store'])->name('AssignPermission.save');
 
 
     Route::group(['middleware' => 'auth'], function() {

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\role;
 
 class RolePermission extends Model
 {
@@ -11,12 +12,13 @@ class RolePermission extends Model
     protected $fillable = [
         'role_id',
         'Item',
-        'permission',
+        'Permission',
     ];
 
-    // protected $casts = [
-    //     'Item' => 'array',
-    //     'permission' => 'array'
-    // ];
-    
+
+    public function roles()
+    {
+        return $this->belongsTo(role::class,'role_id','id');
+    }
+
 }

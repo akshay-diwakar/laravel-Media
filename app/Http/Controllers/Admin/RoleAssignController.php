@@ -13,7 +13,7 @@ class RoleAssignController extends Controller
 {
      public function add($user_id,Request $request,User $user)
      {
-         dd($user);
+         // dd($user);
 
         //  here by using this we can get id which is present in url
         $User_id = $request->route('user_id');
