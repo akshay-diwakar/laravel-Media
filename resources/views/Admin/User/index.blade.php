@@ -44,17 +44,17 @@
                   <td>{{ $Users->id }}</td>
                   <td>{{ $Users->name }}</td>
                   <td>{{ $Users->email }}</td>
-                  <td>{{ $Users->roles }}</td>    
+                  <td></td>    
                   <td>
                      <a href="{{ url( 'Admin/' . $Users->id.'/AssignRole/add') }}">
                         <button class="btn btn-info">Assign Role</button>
                      </a>
                   </td>    
                   <td>
-                        <a href="{{URL('/Admin/users/edit/')}}/{{$Users->id}}"> 
+                        <a href="{{URL('/Admin/users/edit/')}}/{{$Users->id}}" > 
                            <button class="btn btn-secondary">Edit</button>
                         </a>
-                        <form method="POST" action="{{ route('Admin.User.delete',$Users->id) }}">
+                        <form method="POST" action="{{ route('Admin.User.delete',$Users->id) }}" >
                           @method('Delete')
                           @csrf
                           <button class="btn btn-danger">

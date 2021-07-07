@@ -40,12 +40,17 @@
                         <td>{{ $AssignedRole->Item }}</td>
                         <td>{{ $AssignedRole->Permission }}</td>
                         <td> 
-                            <a href="">
+
+                            <a href="{{ url( 'Admin/AssignPermission/Edit/' . $AssignedRole->role_id ) }}">
                                 <button class="btn btn-info">Edit</button>
                             </a>
-                            <a href="">
+                            <form method="POST" action="{{ route('Admin.AssignPermission.delete',$AssignedRole->id) }}">
+                                @method('Delete')
+                                @csrf
                                 <button class="btn btn-danger">Delete</button>
-                            </a>
+                            </form>
+                                
+                            
                         </td>     
                     </tr>
                     @endforeach

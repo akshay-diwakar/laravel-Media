@@ -11,18 +11,16 @@ use App\Models\RoleUser;
 
 class RoleAssignController extends Controller
 {
-     public function add($user_id,Request $request,User $user)
-     {
-         // dd($user);
-
-        //  here by using this we can get id which is present in url
+    public function add(Request $request,User $user)
+    {
+        
         $User_id = $request->route('user_id');
         $Role = role::get();
         
-         return view('AssignRole.add',compact('User_id','Role','user'));
-     }
+        return view('AssignRole.add',compact('User_id','Role'),['user' => $user]);
+    }
 
-     public function store($user_id,Request $request)
+    public function store($user_id,Request $request)
     {
         $data = $request->all();
         // here we are getting 

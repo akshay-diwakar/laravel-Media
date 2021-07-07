@@ -65,7 +65,7 @@ class CommentsController extends Controller
     public function update(Request $request)
     {
         $data = $request->all();
-        // dd($data);
+        
         $Comment = Comments::find($data['Comment_id']);
         $rules = array(
             'comment' => 'required' ,

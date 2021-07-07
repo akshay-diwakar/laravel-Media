@@ -12,13 +12,5 @@ class RoleUser extends Pivot
 {
     use HasFactory;
 
-    public function users()
-    {
-       return $this->belongsToMany(User::class);
-    }
-
-    public function roles()
-    {
-        return $this->belongsToMany(role::class);
-    }
+    
 }

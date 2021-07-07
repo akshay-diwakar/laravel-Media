@@ -43,7 +43,10 @@ Route::prefix('/Admin')->name('Admin.')->group(function () {
     // AssignPermission EndPoints
     Route::get('/AssignPermission',[AssignPermissionController::class,'index'])->name('AssignPermission');
     Route::get('/AssignPermission/Add',[AssignPermissionController::class,'add'])->name('AssignPermission.add');
-    Route::post('/AssignPermissin/save',[AssignPermissionController::class,'store'])->name('AssignPermission.save');
+    Route::post('/AssignPermission/save',[AssignPermissionController::class,'store'])->name('AssignPermission.save');
+    Route::get('/AssignPermission/Edit/{role_id}',[AssignPermissionController::class,'edit'])->name('AssignPermission.Edit');
+    Route::post('/AssignPermission/edit-save',[AssignPermissionController::class,'update'])->name('AssignPermission.edit-save');
+    Route::delete('/AssignPemission/Delete/{id}',[AssignPermissionController::class,'destroy'])->name('AssignPermission.delete');
 
 
     Route::group(['middleware' => 'auth'], function() {
@@ -61,7 +64,8 @@ Route::prefix('/Admin')->name('Admin.')->group(function () {
         // });
               
     });
-            // post endpoints
+        
+        // post endpoints
         Route::get('/Posts', [PostsController::class,'index'])->name('Posts');
         Route::post('/Posts/save',[PostsController::class,'store'])->name('Posts.save');
         Route::post('/Posts/edit-save',[PostsController::class,'update'])->name('Posts.edit-save');
@@ -73,9 +77,6 @@ Route::prefix('/Admin')->name('Admin.')->group(function () {
 
     
 });
-
-
-
 
 
 // Authentication Routes...
@@ -96,3 +97,4 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
 Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
 Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
+
