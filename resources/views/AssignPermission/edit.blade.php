@@ -45,35 +45,75 @@
              </tr>
             </thead>
             <tbody>
-              <tr class="Post">
+              {{-- <tr class="Post">
                     <th scope="row">
                         <input class="form-control" type="text" placeholder="Posts" readonly>
                     </th>
                     
                         <td class="examplelink">
-                            <input type="checkbox" name="Permissions[]" value="PostAdd" {{is_array(old('Permissions',$role_data??[]))&&in_array('PostAdd',old('Permissions',$role_data??[]))?'checked':null}} />
+                            <input type="hidden" name="post" value="Post">
+                            <input type="checkbox" name="Permissions[]" value="Add" {{is_array(old('Permissions',$role_data??[]))&&in_array('PostAdd',old('Permissions',$role_data??[]))?'checked':null}} />
                         </td> 
                         
                     <td class="examplelink">
-                        <input type="checkbox" name="Permissions[]" value="PostView" {{is_array(old('Permissions',$role_data??[]))&&in_array('PostView',old('Permissions',$role_data??[]))?'checked':null}} />
+                        <input type="checkbox" name="Permissions[]" value="View" {{is_array(old('Permissions',$role_data??[]))&&in_array('PostView',old('Permissions',$role_data??[]))?'checked':null}} />
 
                     </td>
                     <td class="examplelink">
-                        <input type="checkbox" name="Permissions[]" value="PostEdit" {{is_array(old('Permissions',$role_data??[]))&&in_array('PostEdit',old('Permissions',$role_data??[]))?'checked':null}} />
-
+                        <input type="checkbox" name="Permissions[]" value="Edit" {{is_array(old('Permissions',$role_data??[]))&&in_array('PostEdit',old('Permissions',$role_data??[]))?'checked':null}} />
                     </td>
                     <td class="examplelink">
-                        <input type="checkbox" name="Permissions[]" value="PostDelete" {{is_array(old('Permissions',$role_data??[]))&&in_array('PostDelete',old('Permissions',$role_data??[]))?'checked':null}} />
+                        <input type="checkbox" name="Permisisons[]" value="Delete" {{is_array(old('Permissions',$role_data??[]))&&in_array('PostDelete',old('Permissions',$role_data??[]))?'checked':null}} />
 
                     </td>
-              </tr>
-              <tr id="Comment">
+              </tr> --}}
+              <tr class="Post">
+                <th scope="row">
+                    <input class="form-control" type="text" placeholder="Posts" readonly>
+                    <input type="hidden" name="Post" value="Post">
+                </th>
+                <td class="examplelink">
+                    {{-- <input type="checkbox" name="Permission_Post[]" value="Add"     {{ ( $role_data['Permission_Post'] === true ? ' checked' : '') }}> --}}
+                    <input type="checkbox" name="Permission_Post[]" value="Add" {{is_array(old('Permission_Post',$role_data??[]))&&in_array('PostAdd',old('Permission_Post',$role_data??[]))?'checked':null}}>
+                </td>
+                <td class="examplelink">
+                    <input type="checkbox" name="Permission_Post[]" value="View" {{is_array(old('Permission_Post',$role_data??[]))&&in_array('PostView',old('Permission_Post',$role_data??[]))?'checked':null}}>
+                </td>
+                <td class="examplelink">
+                    <input type="checkbox" name="Permission_Post[]" value="Edit" {{is_array(old('Permission_Post',$role_data??[]))&&in_array('PostEdit',old('Permission_Post',$role_data??[]))?'checked':null}}>
+                </td>
+                <td class="examplelink">
+                    <input type="checkbox" name="Permission_Post[]" value="Delete" {{is_array(old('Permission_Post',$role_data??[]))&&in_array('PostDelete',old('Permission_Post',$role_data??[]))?'checked':null}}>
+                </td>
+          </tr> 
+          
+          
+          <tr id="Comment">
+                <th scope="row">
+                    <input class="form-control" type="text" placeholder="Comments" readonly>
+                   <input type="hidden" name="Comment" value="Comment">
+                </th>
+                <td class="examplelink">
+                    <input type="checkbox" name="Permission_Comment[]" value="Add" {{is_array(old('Permission_Comment',$role_data??[]))&&in_array('CommentAdd',old('Permission_Comment',$role_data??[]))?'checked':null}}>
+                </td>
+                <td class="examplelink">
+                    <input type="checkbox" name="Permission_Comment[]" value="View" {{is_array(old('Permission_Comment',$role_data??[]))&&in_array('CommentView',old('Permission_Comment',$role_data??[]))?'checked':null}}>
+                </td>
+                <td class="examplelink">
+                    <input type="checkbox" name="Permission_Comment[]" value="Edit" {{is_array(old('Permission_Comment',$role_data??[]))&&in_array('CommentEdit',old('Permission_Comment',$role_data??[]))?'checked':null}}>
+                </td>
+                <td class="examplelink">
+                    <input type="checkbox" name="Permission_Comment[]" value="Delete"  {{is_array(old('Permission_Comment',$role_data??[]))&&in_array(' CommentDelete',old('Permission_Comment',$role_data??[]))?'checked':null}} >
+                </td>
+          </tr>
+               {{-- <tr id="Comment">
                     <th scope="row">
                         <input class="form-control" type="text" placeholder="Comments" readonly>
-                        {{-- <input type="hidden" name="selected[]" value="User" onclick=""> --}}
-                    </th>
+                        <input type="hidden" name="selected[]" value="User" onclick="">
+                     </th> 
               
                     <td class="examplelink">
+                        <input type="hidden" value="Comment">
                         <input type="checkbox" name="Permissions[]" value="CommentAdd" {{is_array(old('Permissions',$role_data??[]))&&in_array('CommentAdd',old('Permissions',$role_data??[]))?'checked':null}} />
 
                     </td>
@@ -87,24 +127,44 @@
                     <td class="examplelink">
                         <input type="checkbox" name="Permissions[]" value="CommentDelete" {{is_array(old('Permissions',$role_data??[]))&&in_array('CommentDelete',old('Permissions',$role_data??[]))?'checked':null}}>
                     </td>
-              </tr>
+              </tr>   --}}
+
               <tr id="User">
+                <th scope="row">
+                    <input class="form-control" type="text" placeholder="User" readonly>
+                    <input type="hidden" name="User" value="User">
+                </th>
+                <td class="examplelink">
+                    <input type="checkbox" name="Permission_User[]" value="Add"  {{is_array(old('Permission_User',$role_data??[]))&&in_array('UserAdd',old('Permission_User',$role_data??[]))?'checked':null}}>
+                </td>
+                <td class="examplelink">
+                    <input type="checkbox" name="Permission_User[]" value="View"  {{is_array(old('Permission_User',$role_data??[]))&&in_array('UserView',old('Permission_User',$role_data??[]))?'checked':null}}>
+                </td>
+                <td class="examplelink">
+                    <input type="checkbox" name="Permission_User[]" value="Edit"  {{is_array(old('Permission_User',$role_data??[]))&&in_array('UserEdit',old('Permission_User',$role_data??[]))?'checked':null}}>
+                </td>
+                <td class="examplelink">
+                    <input type="checkbox" name="Permission_User[]" value="Delete"  {{is_array(old('Permission_User',$role_data??[]))&&in_array('UserDelete',old('Permission_User',$role_data??[]))?'checked':null}}>
+                </td>
+          </tr>
+              {{-- <tr id="User">
                     <th scope="row">
                         <input class="form-control" type="text" placeholder="User" readonly>
                     </th>
                     <td class="examplelink">
-                        <input type="checkbox" name="Permissions[]" value="UserAdd" {{is_array(old('Permissions',$role_data??[]))&&in_array('UserAdd',old('Permissions',$role_data??[]))?'checked':null}}>
+                        <input type="hidden" value="User">
+                        <input type="checkbox" name="Permissions[]" value="Add" {{is_array(old('Permissions',$role_data??[]))&&in_array('UserAdd',old('Permissions',$role_data??[]))?'checked':null}}>
                     </td>
                     <td class="examplelink">
-                        <input type="checkbox" name="Permissions[]" value="UserView" {{is_array(old('Permissions',$role_data??[]))&&in_array('UserView',old('Permissions',$role_data??[]))?'checked':null}}>
+                        <input type="checkbox" name="Permissions[]" value="View" {{is_array(old('Permissions',$role_data??[]))&&in_array('UserView',old('Permissions',$role_data??[]))?'checked':null}}>
                     </td>
                     <td class="examplelink">
-                        <input type="checkbox" name="Permissions[]" value="UserEdit" {{is_array(old('Permissions',$role_data??[]))&&in_array('UserEdit',old('Permissions',$role_data??[]))?'checked':null}}>
+                        <input type="checkbox" name="Permissions[]" value="Edit" {{is_array(old('Permissions',$role_data??[]))&&in_array('UserEdit',old('Permissions',$role_data??[]))?'checked':null}}>
                     </td>
                     <td class="examplelink">
-                        <input type="checkbox" name="Permissions[]" value="UserDelete" {{is_array(old('Permissions',$role_data??[]))&&in_array('UserDelete',old('Permissions',$role_data??[]))?'checked':null}}>
+                        <input type="checkbox" name="Permissions[]" value="Delete" {{is_array(old('Permissions',$role_data??[]))&&in_array('UserDelete',old('Permissions',$role_data??[]))?'checked':null}}>
                     </td>
-              </tr>
+              </tr> --}}
             </tbody>
           </table>
             <input  type="submit" class="btn btn-primary" value="Submit"  />
@@ -112,3 +172,4 @@
     </div>
  
 @endsection
+

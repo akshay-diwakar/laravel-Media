@@ -7,6 +7,9 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\RoleAssignController;
 use App\Http\Controllers\AssignPermissionController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ItemsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +51,19 @@ Route::prefix('/Admin')->name('Admin.')->group(function () {
     Route::post('/AssignPermission/edit-save',[AssignPermissionController::class,'update'])->name('AssignPermission.edit-save');
     Route::delete('/AssignPemission/Delete/{id}',[AssignPermissionController::class,'destroy'])->name('AssignPermission.delete');
 
+    // Role EndPoints
+    Route::get('/AssignRole',[RoleController::class,'index'])->name('AssignRole');
+    Route::get('/AssignRole/Add',[RoleController::class,'create'])->name('AssignRole.Add');
+    Route::post('/AssignRole/save',[RoleController::class,'store'])->name('AssignRole.save');
+
+    // Items EndPoints
+    Route::get('/AssignItem',[ItemsController::class,'index'])->name('AssignItem');
+    Route::get('/AssignItem/add',[ItemsController::class,'create'])->name('AssignItem.Add');
+    Route::post('AssignItem/save',[ItemsController::class,'store'])->name('AssignItem.save');
+    Route::get('/AssignItem/edit/{id}',[ItemsController::class,'edit'])->name('AssignItem.edit');
+    Route::post('/AssignItem/edit-save',[ItemsController::class,'update'])->name('AssignItem.edit-save');
+    Route::delete('/AssignItem/delete/{id}',[ItemsController::class,'destroy'])->name('AssignItem.delete');
+
 
     Route::group(['middleware' => 'auth'], function() {
     
@@ -72,7 +88,6 @@ Route::prefix('/Admin')->name('Admin.')->group(function () {
 
 
         // comments endpoints
-        // Route::get('/Posts',[CommentsController::class,'index']);
         Route::post('/Comments/edit-save',[CommentsController::class,'update'])->name('Comments.edit-save');
 
     
@@ -97,4 +112,6 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
 Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
 Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
+
+
 

@@ -16,46 +16,20 @@
 </div>
 @endif
 @section('content')
-   <div class="container" style="margin-top: 10px;">
-       <div class="container">
-           <a href="{{ route('Admin.AssignPermission.add') }}">
-               <button class="btn btn-primary">Add Permission</button>
-           </a>
-       </div>   
-            <table class="table"  style="margin-top: 20px;">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Role</th>
-                    <th scope="col">Item</th>
-                    <th scope="col">Permission</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-                <tbody>
-                    @foreach ($RolePermission as $AssignedRole)
-                    <tr>
-                        <th scope="row">{{ $AssignedRole->id }}</th>
-                        <td>{{ $AssignedRole->roles->name }}</td>
-                        <td>{{ $AssignedRole->Item }}</td>
-                        <td>{{ $AssignedRole->Permission }}</td>
-                        <td> 
+{{-- navbar for roles and permissions --}}
+<div class="container">
+    <a href="{{ route('Admin.AssignRole') }}">
+        <button class="btn btn-dark">Roles</button>
+    </a>
+    <a href="{{ route('Admin.AssignItem') }}" style="margin-left:15px;">
+        <button class="btn btn-info">Items</button>
+    </a>
+</div>
+ @yield('add_roles')
+ @endsection
 
-                            <a href="{{ url( 'Admin/AssignPermission/Edit/' . $AssignedRole->role_id ) }}">
-                                <button class="btn btn-info">Edit</button>
-                            </a>
-                            <form method="POST" action="{{ route('Admin.AssignPermission.delete',$AssignedRole->id) }}">
-                                @method('Delete')
-                                @csrf
-                                <button class="btn btn-danger">Delete</button>
-                            </form>
-                                
-                            
-                        </td>     
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-   </div>
 
-@endsection
+
+
+
+    

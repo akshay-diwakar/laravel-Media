@@ -17,10 +17,10 @@
 @endif
 @section('content')
 <div class="container">
-  <a href="{{ route('Admin.AssignPermission')}}">
-    <button class="btn btn-dark">Permission</button>
+  <a href="{{ route('Admin.AssignPermission')}}" >
+    <button class="btn btn-dark">Roles & Permissions</button>
   </a>
-  <a href="{{ route('Admin.User.add')}} ">
+  <a href="{{ route('Admin.User.add')}} " style="margin-left:20px;">
     <button class="btn btn-primary">Add Users</button> 
   </a>
   

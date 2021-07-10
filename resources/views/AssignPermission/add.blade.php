@@ -53,53 +53,55 @@
               <tr class="Post">
                     <th scope="row">
                         <input class="form-control" type="text" placeholder="Posts" readonly>
+                        <input type="hidden" name="Post" value="Post">
                     </th>
                     <td class="examplelink">
-                        <input type="checkbox" name="Permissions[]" value="PostAdd">
+                        <input type="checkbox" name="Permission_Post[]" value="Add">
                     </td>
                     <td class="examplelink">
-                        <input type="checkbox" name="Permissions[]" value="PostView">
+                        <input type="checkbox" name="Permission_Post[]" value="View">
                     </td>
                     <td class="examplelink">
-                        <input type="checkbox" name="Permissions[]" value="PostEdit">
+                        <input type="checkbox" name="Permission_Post[]" value="Edit">
                     </td>
                     <td class="examplelink">
-                        <input type="checkbox" name="Permissions[]" value="PostDelete">
+                        <input type="checkbox" name="Permission_Post[]" value="Delete">
                     </td>
               </tr>
               <tr id="Comment">
                     <th scope="row">
                         <input class="form-control" type="text" placeholder="Comments" readonly>
-                        {{-- <input type="hidden" name="selected[]" value="User" onclick=""> --}}
+                       <input type="hidden" name="Comment" value="Comment">
                     </th>
                     <td class="examplelink">
-                        <input type="checkbox" name="Permissions[]" value="CommentAdd">
+                        <input type="checkbox" name="Permission_Comment[]" value="Add">
                     </td>
                     <td class="examplelink">
-                        <input type="checkbox" name="Permissions[]" value="CommentView">
+                        <input type="checkbox" name="Permission_Comment[]" value="View">
                     </td>
                     <td class="examplelink">
-                        <input type="checkbox" name="Permissions[]" value="CommentEdit">
+                        <input type="checkbox" name="Permission_Comment[]" value="Edit">
                     </td>
                     <td class="examplelink">
-                        <input type="checkbox" name="Permissions[]" value="CommentDelete">
+                        <input type="checkbox" name="Permission_Comment[]" value="Delete">
                     </td>
               </tr>
               <tr id="User">
                     <th scope="row">
                         <input class="form-control" type="text" placeholder="User" readonly>
+                        <input type="hidden" name="User" value="User">
                     </th>
                     <td class="examplelink">
-                        <input type="checkbox" name="Permissions[]" value="UserAdd">
+                        <input type="checkbox" name="Permission_User[]" value="Add">
                     </td>
                     <td class="examplelink">
-                        <input type="checkbox" name="Permissions[]" value="UserView">
+                        <input type="checkbox" name="Permission_User[]" value="View">
                     </td>
                     <td class="examplelink">
-                        <input type="checkbox" name="Permissions[]" value="UserEdit">
+                        <input type="checkbox" name="Permission_User[]" value="Edit">
                     </td>
                     <td class="examplelink">
-                        <input type="checkbox" name="Permissions[]" value="UserDelete">
+                        <input type="checkbox" name="Permissions_User[]" value="Delete">
                     </td>
               </tr>
             </tbody>
@@ -108,11 +110,5 @@
         </form>
     </div>
     
-{{-- <script type="text/javascript">
-        function getValue(){
-            var id = document.getElementById("post");
-            alert($id);
-        }
-</script>  --}}
 
 @endsection
