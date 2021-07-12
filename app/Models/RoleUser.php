@@ -12,5 +12,4 @@ class RoleUser extends Pivot
 {
     use HasFactory;
 
-    
 }

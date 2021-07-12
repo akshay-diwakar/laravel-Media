@@ -15,7 +15,9 @@ class UserController extends Controller
 {
     public function index(Request $request)
     { 
-       $User = User::get();
+        // https://www.itsolutionstuff.com/post/laravel-eager-loading-with-selected-columns-exampleexample.html
+       $User = User::with('roles:name')->get();
+        // dd($User);
        $Role = role::get();
        return view('Admin.User.index',compact('User'));  
     }

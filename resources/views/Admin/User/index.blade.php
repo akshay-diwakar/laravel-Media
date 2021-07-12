@@ -44,7 +44,11 @@
                   <td>{{ $Users->id }}</td>
                   <td>{{ $Users->name }}</td>
                   <td>{{ $Users->email }}</td>
-                  <td></td>    
+                  {{-- using this we can fetch data from pivot table and show a particular column of that --}}
+                  {{-- https://stackoverflow.com/questions/43716394/laravel-sentinel-how-to-get-value-through-pivot-table --}}
+                  @foreach ($Users->roles as $role) 
+                        <td>  {{$role->name}} </td>
+                  @endforeach
                   <td>
                      <a href="{{ url( 'Admin/' . $Users->id.'/AssignRole/add') }}">
                         <button class="btn btn-info">Assign Role</button>
