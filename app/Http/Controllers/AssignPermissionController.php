@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Validator;
 use App\Models\role;
 use App\Models\RolePermission;
+use App\Models\Item;
+use App\Models\Permission;
 
 class AssignPermissionController extends Controller
 {
@@ -18,119 +20,50 @@ class AssignPermissionController extends Controller
         return view('AssignPermission.index',compact('RolePermission','Role'));
     }
 
-    public function add(Request $request)
+    public function add($Role_id,Request $request)
     {
-        $Role = role::get();
-        return view('AssignPermission.add',compact('Role'));
+        $role_data = RolePermission::where(['role_id' => $Role_id])->get()->map(function ($role){
+            $item_id = $role->Item_id;
+            $item_data = Item::where(['id' => $item_id])->get();
+            foreach($item_data as $item){
+                    $data = $item->name;
+            }
+
+            return $data.$role->permission_id;
+        })->toArray();
+
+        $Items = Item::all();
+        $Permissions = Permission::all();
+        $Role = Role::Find($Role_id);
+        return view('AssignPermission.add',compact('Role','Items','Permissions','role_data'));
     }
 
-    // public function store(Request $request)
-    // {
-    //     $data = $request->all();
+    public function store(Request $request)
+    {
+        // dd($request->all());
+        $data = RolePermission::where(['role_id'=> $request->role_id])->delete();
         
-    //     $rules = array(
-    //        'Roles' => 'required',
-    //     );
-    //     $validate=Validator::make($data,$rules);
-    //     if ($validate->fails()) {
-    //         return redirect()->back()->withInput()->withErrors($validate);
-    //     }
-    //     else{
-        
+        foreach ($request->Permissions as $item) {
+            $item_id = $item['id'];
+            if(!empty ($item['data'])){
 
-    //             $data_Post = $request->input('Permission_Post');
-    //             if (is_array($request->get('Permission_Post'))) {
-    //                 foreach($data_Post as $s){
-    //                     RolePermission::create([
-    //                     'role_id' => $request->Roles,
-    //                     'Item' => $request->Post,
-    //                     'Permission' => $s
-    //                     ]);
-    //                 }
-    //             }
-    //             $data_Comment = $request->input('Permission_Comment');
-    //             if (is_array($request->get('Permission_Comment'))) {
-    //                 foreach($data_Comment as $s){
-    //                     RolePermission::create([
-    //                     'role_id' => $request->Roles,
-    //                     'Item' => $request->Comment,
-    //                     'Permission' => $s
-    //                     ]);
-    //                 }
-    //             }
-    //             $data_User = $request->input('Permission_User');
-    //             if (is_array($request->get('Permission_User'))) {
-    //                 foreach($data_User as $s){
-    //                     RolePermission::create([
-    //                     'role_id' => $request->Roles,
-    //                     'Item' => $request->User,
-    //                     'Permission' => $s
-    //                     ]);
-    //                 }
-    //             }
-
-                    
-
-    //             return redirect('/Admin/AssignPermission')->with('success');
-
-    //         }
+                foreach ($item['data'] as $key => $value) {
+                    // dd($value);
+                    $RolePermission = new RolePermission;
+                    $RolePermission->role_id = $request->role_id;
+                    $RolePermission->Item_id = $item_id;
+                    $RolePermission->permission_id = $value;
+                    $RolePermission->save();
+                }
+            }
+            
+        }
+        return redirect('/Admin/AssignPermission')->with('success');
   
 
-    //     }
+    }
 
-           
-        // public function edit($role_id,Request $request)
-        // {
-        //     $Role_id = $request->route('role_id');
-            
-        //     $role_data = RolePermission::where(['role_id' => $role_id])->get()->map(function ($role){
-        //         return $role->Item.$role->Permission;
-        //     })->toArray();
-        //     // dd($role_data);
-            
-        //     return view('AssignPermission.edit',compact('role_data','Role_id'));
-        // }
-     
-    //  public function update(Request $request){
-        //  $data = $request->all();
-        //  dd($data);
-        // $delete_id = RolePermission::Where(['role_id' => $request->Role_id])->Delete();
-        
-        // $data_Post = $request->input('Permission_Post');
-        //         if (is_array($request->get('Permission_Post'))) {
-        //             foreach($data_Post as $s){
-        //                 RolePermission::create([
-        //                 'role_id' => $request->Role_id,
-        //                 'Item' => $request->Post,
-        //                 'Permission' => $s
-        //                 ]);
-        //             }
-        //         }
-
-
-        //         $data_Comment = $request->input('Permission_Comment');
-        //         if (is_array($request->get('Permission_Comment'))) {
-        //             foreach($data_Comment as $s){
-        //                 RolePermission::create([
-        //                 'role_id' => $request->Role_id,
-        //                 'Item' => $request->Comment,
-        //                 'Permission' => $s
-        //                 ]);
-        //             }
-        //         }
-        //         $data_User = $request->input('Permission_User');
-        //         if (is_array($request->get('Permission_User'))) {
-        //             foreach($data_User as $s){
-        //                 RolePermission::create([
-        //                 'role_id' => $request->Role_id,
-        //                 'Item' => $request->User,
-        //                 'Permission' => $s
-        //                 ]);
-        //             }
-        //         } 
-
-    //       return redirect('/Admin/AssignPermission');
-    //   }
+      
         
         public function destroy($id)
         {

@@ -11,8 +11,8 @@ class RolePermission extends Model
     use HasFactory;
     protected $fillable = [
         'role_id',
-        'Item',
-        'Permission',
+        'Item_id',
+        'permission_id',
     ];
 
 
@@ -20,5 +20,6 @@ class RolePermission extends Model
     {
         return $this->belongsTo(role::class,'role_id','id');
     }
+
 
 }

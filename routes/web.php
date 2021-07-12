@@ -45,7 +45,7 @@ Route::prefix('/Admin')->name('Admin.')->group(function () {
 
     // AssignPermission EndPoints
     Route::get('/AssignPermission',[AssignPermissionController::class,'index'])->name('AssignPermission');
-    Route::get('/AssignPermission/Add',[AssignPermissionController::class,'add'])->name('AssignPermission.add');
+    Route::get('/AssignPermission/Add/{role_id}',[AssignPermissionController::class,'add'])->name('AssignPermission.add');
     Route::post('/AssignPermission/save',[AssignPermissionController::class,'store'])->name('AssignPermission.save');
     Route::get('/AssignPermission/Edit/{role_id}',[AssignPermissionController::class,'edit'])->name('AssignPermission.Edit');
     Route::post('/AssignPermission/edit-save',[AssignPermissionController::class,'update'])->name('AssignPermission.edit-save');
@@ -64,8 +64,6 @@ Route::prefix('/Admin')->name('Admin.')->group(function () {
     Route::post('/AssignItem/edit-save',[ItemsController::class,'update'])->name('AssignItem.edit-save');
     Route::delete('/AssignItem/delete/{id}',[ItemsController::class,'destroy'])->name('AssignItem.delete');
 
-
-    Route::group(['middleware' => 'auth'], function() {
     
         // Route::group(['middleware' => ['EnsureAutherized'] ], function(){
             // Post endpoints
@@ -79,13 +77,12 @@ Route::prefix('/Admin')->name('Admin.')->group(function () {
             Route::delete('/Comments/delete/{id}',[CommentsController::class,'destroy'])->name('Comments.delete');
         // });
               
-    });
+    // });
         
         // post endpoints
         Route::get('/Posts', [PostsController::class,'index'])->name('Posts');
         Route::post('/Posts/save',[PostsController::class,'store'])->name('Posts.save');
         Route::post('/Posts/edit-save',[PostsController::class,'update'])->name('Posts.edit-save');
-
 
         // comments endpoints
         Route::post('/Comments/edit-save',[CommentsController::class,'update'])->name('Comments.edit-save');

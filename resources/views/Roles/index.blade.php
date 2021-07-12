@@ -22,7 +22,7 @@
                       <td>{{ $roles->id }}</td>
                       <td>{{ $roles->name }}</td>
                       <td>
-                        <a href="{{ route('Admin.AssignPermission.add') }}">
+                        <a href="{{ route('Admin.AssignPermission.add' ,$roles->id )}}">
                           <i class="fas fa-edit" aria-hidden="true"></i>
                         </a>
                       </td>
