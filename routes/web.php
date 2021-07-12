@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\RoleAssignController;
 use App\Http\Controllers\AssignPermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ItemsController;
-
+use App\Http\Controllers\PermissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +55,16 @@ Route::prefix('/Admin')->name('Admin.')->group(function () {
     Route::get('/AssignRole',[RoleController::class,'index'])->name('AssignRole');
     Route::get('/AssignRole/Add',[RoleController::class,'create'])->name('AssignRole.Add');
     Route::post('/AssignRole/save',[RoleController::class,'store'])->name('AssignRole.save');
+    Route::delete('AssignRole/delete/{id}',[RoleController::class,'destroy'])->name('AssignRole.delete');
+
+    // Permission EndPoints
+    Route::get('/AddPermission',[PermissionController::class,'index'])->name('AddPermission');
+    Route::get('/AddPermission/Add',[PermissionController::class,'create'])->name('AddPermission.Add');
+    Route::post('/AddPermission/save',[PermissionController::class,'store'])->name('AddPermission.save');
+    Route::get('/AddPermission/edit/{id}',[PermissionController::class,'edit'])->name('AddPermission.edit');
+    Route::post('/AddPermission/edit-save',[PermissionController::class,'update'])->name('AddPermission.edit-save');
+    Route::delete('/AddPermission/delete/{id}',[PermissionController::class,'destroy'])->name('AddPermission.delete');
+
 
     // Items EndPoints
     Route::get('/AssignItem',[ItemsController::class,'index'])->name('AssignItem');

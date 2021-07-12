@@ -25,6 +25,14 @@
                         <a href="{{ route('Admin.AssignPermission.add' ,$roles->id )}}">
                           <i class="fas fa-edit" aria-hidden="true"></i>
                         </a>
+                        <form method="POST" action="{{ route('Admin.AssignRole.delete',$roles->id) }}">
+                          @method('delete')
+                          @csrf
+                          <button>
+                            <i class="fas fa-trash-alt"></i>
+
+                            </button>
+                        </form>
                       </td>
                   </tr>    
               @endforeach

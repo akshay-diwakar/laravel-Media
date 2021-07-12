@@ -24,6 +24,10 @@
     <a href="{{ route('Admin.AssignItem') }}" style="margin-left:15px;">
         <button class="btn btn-info">Items</button>
     </a>
+    <a href="{{ route('Admin.AddPermission') }}" style="margin-left:15px;">
+        <button class="btn btn-secondary">Permissions</button>
+    </a>
+
 </div>
  @yield('add_roles')
  @endsection
