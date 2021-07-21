@@ -30,22 +30,24 @@
                       @endforeach
                   </ul>
               </div>
-            @endif
-            @csrf
-            <div class="form-group">
-                <label>User Name</label>
-                  <input type="text" class="form-control" placeholder="User Name" value="{{ $user->name }}" name="rolename" readonly>
-            </div>
-              <div >
-                 <label>Roles</label>
-              </div>
-
-              @foreach ($Role as $role)
+              @endif
+              @csrf
+              <div class="form-group">
+                  {{-- <label></label> --}}
+                  {{-- @foreach ($role->users as $user)
+                    <input type="text" class="form-control" placeholder="User Name" value="{{ $user->name }}" name="rolename" readonly>
+                    @endforeach --}}
+                </div>
+                <div >
+                    <label>Roles</label>
+                </div>
+                
+                @foreach ($Role as $role)
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="role" value="{{$role->id}}">
                     <label class="form-check-label">{{$role->name}}</label>
                 </div>    
-              @endforeach
+              @endforeach   
               <div style="margin-top: 5px;">
                   <input type="submit" class="btn btn-primary" value="Submit">
               </div>

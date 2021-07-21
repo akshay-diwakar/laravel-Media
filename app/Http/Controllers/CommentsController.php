@@ -48,8 +48,8 @@ class CommentsController extends Controller
              );
 
             $Comment = Comments::create($form_data);
-            $Message = "successfully added";
-            return redirect('/Posts')->with('success',$Message);
+            // $Message = "successfully added";
+            return redirect('/Admin/Posts')->with('success');
          }
     }
 
@@ -82,8 +82,8 @@ class CommentsController extends Controller
             );
 
              $Comment->update($form_data);
-             $Message = "update successfully";
-             return redirect('/Posts')->with('success',$Message);
+             // $Message = "update successfully";
+             return redirect('/Posts')->with('success');
         }
     }
 

@@ -16,7 +16,10 @@ class RoleAssignController extends Controller
         
         $User_id = $request->route('user_id');
         $Role = role::get();
-        
+        // $Role_name = role::with('users:name')->get();
+        // dd($Role_name);
+        // $user = $user::get('name');
+        // dd($user);
         return view('AssignRole.add',compact('User_id','Role'),['user' => $user]);
     }
 
@@ -25,12 +28,10 @@ class RoleAssignController extends Controller
         $data = $request->all();
         // here we are getting 
         $Role_id = $request->input('role');
-        // dd($Role_id);
+        
         // dd($data);the id of role which is getting inserted and assigning a variable to you.
         $User_id = $request->route('user_id');
-        // dd($User_id);
-        // dd($Role_id);
-        // dd($data);
+        
         $rules = array(
             'role' => 'required',
         );

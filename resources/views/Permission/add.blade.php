@@ -18,7 +18,7 @@
 @section('add_roles')
 
 <div class="container" style="margin-top:100px; border:3px solid blue; border-radius:10px;">
-    <form method="POST" action="{{ route('Admin.AddPermission.save) }}">
+    <form method="POST" action="{{ route('Admin.AddPermission.save') }}">
         @if ($errors->any())
             <div class="alert alert-danger alert-dismissable">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

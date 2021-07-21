@@ -77,7 +77,7 @@
                         </div>
                 </div>
                 <div id="myDIV" style="margin-top: 20px;" class="col-md-6">
-                   <form action="{{ route('Comments.edit-save')}}" method="POST">
+                   <form action="{{ route('Admin.Comments.edit-save')}}" method="POST">
                     <input type="hidden" name="Comment_id" value="{{$Comment->id}}" />
                     @csrf
                     <div class="form-group">

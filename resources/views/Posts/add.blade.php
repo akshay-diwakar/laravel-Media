@@ -19,7 +19,7 @@
 
 <div class="container">
     <section style="margin-top:30px;">
-        <form method="post" action="{{ route('Posts.save') }}" enctype="multipart/form-data">
+        <form method="post" action="{{ route('Admin.Posts.save') }}" enctype="multipart/form-data">
           
           @if ($errors->any())
               <div class="alert alert-danger alert-dismissable">

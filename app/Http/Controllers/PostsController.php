@@ -9,6 +9,7 @@ use Auth;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\role;
+use App\Models\Comments;
 
 
 class PostsController extends Controller
@@ -19,7 +20,8 @@ class PostsController extends Controller
     {
         $Post = Post::get();
         $User = User::get();
-        return view('Posts.index',compact('Post'));
+        $Comment = Comments::get();
+        return view('Posts.index',compact('Post','Comment'));
     }
 
     public function add(Request $request)
@@ -58,8 +60,8 @@ class PostsController extends Controller
            );
         //    dd($form_data);
            $Posts = Post::create($form_data);
-           $Message = "successfully added";
-           return redirect('/Posts')->with('success',$Message);
+           // $Message = "successfully added";
+           return redirect('/Admin/Posts')->with('success',$Message);
         }   
     }
 
@@ -102,8 +104,8 @@ class PostsController extends Controller
               );
 
              $Post->update($form_data);
-             $Message = "update successfully";
-             return redirect('/Posts')->with('success',$Message);
+             // $Message = "update successfully";
+             return redirect('/Admin/Posts')->with('success');
         }
     }    
 
@@ -112,7 +114,7 @@ class PostsController extends Controller
         $Post = Post::findOrFail($id);
         $Post->delete();
   
-        return redirect()->back()->with('success','Post deleted successfully');
+        return redirect()->back()->with('success');
     }
 
 }

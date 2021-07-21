@@ -45,14 +45,14 @@
                 <div class="card-body">
                     {{-- user name --}}
                     <h2><b>{{ $Posts->user->name}}</b></h2>
-                    <div style="margin-left:880px;">
-                       <a href="{{URL('/Posts/edit/')}}/{{$Posts->id}}"> 
-                            <button class="btn btn-secondary">
+                    <div style="margin-left:880px;" >
+                       <a href="{{URL('/Admin/Posts/edit/')}}/{{$Posts->id}}"> 
+                            <button class="btn btn-secondary" style="margin-bottom: 2px;">
                                  edit
                             </button> 
                        </a>
                        {{-- @if(auth()->users()->id == $Posts->user_id) --}}
-                            <form method="POST" action="{{ route('Posts.delete',$Posts->id) }}" style="margin-left:54px; margin-top:-38px;">
+                            <form method="POST" action="{{ route('Admin.Posts.delete',$Posts->id) }}" style="margin-left:54px; margin-top:-38px;">
                                 @method('Delete')
                                 @csrf
                                 <button class="btn btn-danger">
@@ -66,6 +66,7 @@
                     </div>
                     <h5 class="card-title">{{ $Posts->title}}</h5>
                     <p class="card-text">{{ $Posts->description}}</p>
+                    <!-- https://stackoverflow.com/a/65384757/16445004 here is the answer for linking back to public folder to storage folder -->
                     <img class="card-img-bottom" src="{{ Storage::url($Posts->Image)}}" width="200" height="450">
                 </div>  
                 <p class="card-text" style="margin-left:12px;"><small class="text-muted">{{ $Posts->created_at}}</small></p>
@@ -81,7 +82,7 @@
                         </div>
                 </div>
                 <div id="myDIV" style="margin-top: 20px;" class="col-md-6">
-                   <form action="{{ route('Comments.save')}}" method="POST">
+                   <form action="{{ route('Admin.Comments.save')}}" method="POST">
                     @csrf
                     <div class="form-group">
                         <label>Comment</label>
@@ -92,28 +93,25 @@
                    </form>
                 </div>
                 
-
-                
-
                 {{-- fetching comments --}}
                 <div id="mycoments" style="margin-top: 12px; border: 4px solid pink;">
                     
                     <div class="card">
 
                         @foreach ($Comment as $Comments)
-                        <div class="card-body">
-                            <h1 class="">{{$Comments->user()->name}}</h1>  
+                        <div class="card-body" >
+                            <label>{{$Comments->User->name}}</label> 
                             
-                            <p>{{$Comments->comment }}</p>
+                            <p>{{ $Comments->comment }}</p>
                             <div style="margin-left:70%;" class="row">
                                 <div style="margin-right:10px;">
-                                    <a href="{{ URL('/Comments/edit')}}/{{$Comments->id}}"> 
+                                    <a href="{{ URL('/Admin/Comments/edit')}}/{{$Comments->id}}"> 
                                              <button class="btn btn-secondary">
                                                   edit
                                              </button> 
                                     </a>
                                 </div> 
-                                <form method="POST" action="{{ route('Comments.delete',$Comments->id)}}">
+                                <form method="POST" action="{{ route('Admin.Comments.delete',$Comments->id)}}">
                                     @method('delete')
                                     @csrf   
                                     <div>
@@ -121,12 +119,15 @@
                                     </div>
                                 </form>     
                             </div>
-                            <hr>
+                            
                         </div>
                         @endforeach
                     </div> 
                     
-                </div>
+                </div> 
+                
+
+                
                     
       </div>
     </div>      

@@ -19,26 +19,10 @@
 
 
 
-@if(session()->has('error'))
-<div class="alert alert-danger alert-dismissable">
-    <i class="fa fa-ban"></i>
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    &nbsp; {{ session()->get('error') }}
-</div>
-@endif
-
-@if(session()->has('success'))
-<div class="alert alert-success alert-dismissable">
-    <i class="fa fa-check"></i>
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    &nbsp;{{ session()->get('success') }}
-</div>
-@endif
-
 <div class="container">
     <section style="margin-top:30px;">
         <h1>Edit form</h1>
-        <form method="post" action="{{ route('Posts.edit-save') }}" enctype="multipart/form-data">
+        <form method="post" action="{{ route('Admin.Posts.edit-save') }}" enctype="multipart/form-data">
          <input type="hidden" name="Post_id" value="{{ $Posts->id}}" /> 
           @if ($errors->any())
               <div class="alert alert-danger alert-dismissable">

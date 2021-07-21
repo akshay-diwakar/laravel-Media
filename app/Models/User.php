@@ -11,6 +11,8 @@ use App\Models\Post;
 use App\Models\Comments;
 use App\Models\role;
 use App\Models\RoleUser;
+use App\Models\RolePermission;
+
 
 class User extends Authenticatable
 {
@@ -62,4 +64,9 @@ class User extends Authenticatable
          return $this->belongsToMany(role::class,'role_user','role_id','user_id')->using(RoleUser::class);
     }
        
+
+    public function rolepermission()
+    {
+        return $this->hasOne(RolePermission::class);
+    }
 }

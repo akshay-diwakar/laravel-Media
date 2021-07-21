@@ -11,6 +11,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\PermissionController;
 
+use App\Http\Middleware\AssignRole;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,63 +32,65 @@ Route::prefix('/Admin')->name('Admin.')->group(function () {
     
     Route::get('/',[HomeController::class,'index']);
 
-    // users endpoint
-    Route::get('/users',[UserController::class,'index'])->name('User');
-    Route::get('/users/add',[UserController::class,'add'])->name('User.add');
-    Route::post('/users/save',[UserController::class,'store'])->name('User.save');
-    Route::get('/users/edit/{id}',[UserController::class,'edit'])->name('User.edit');
-    Route::post('/users/edit-save',[UserController::class,'update'])->name('User.edit-save');
-    Route::delete('/users/delete/{id}',[UserController::class,'destroy'])->name('User.delete');
+    Route::group(['middleware' => 'auth'], function() {
+        
+        // users endpoint
+        Route::get('/users',[UserController::class,'index'])->name('User');
+        Route::get('/users/add',[UserController::class,'add'])->name('User.add');
+        Route::post('/users/save',[UserController::class,'store'])->name('User.save');
+        Route::get('/users/edit/{id}',[UserController::class,'edit'])->name('User.edit');
+        Route::post('/users/edit-save',[UserController::class,'update'])->name('User.edit-save');
+        Route::delete('/users/delete/{id}',[UserController::class,'destroy'])->name('User.delete');
 
-    // AssignRole EndPoints
-    Route::get('/{user_id}/AssignRole/add',[RoleAssignController::class,'add'])->name('RoleAssign.add');
-    Route::post('/{user_id}/AssignRole/save',[RoleAssignController::class,'store'])->name('RoleAssign.save');
+        // AssignRole EndPoints
+        Route::get('/{user_id}/AssignRole/add',[RoleAssignController::class,'add'])->name('RoleAssign.add');
+        Route::post('/{user_id}/AssignRole/save',[RoleAssignController::class,'store'])->name('RoleAssign.save');
 
-    // AssignPermission EndPoints
-    Route::get('/AssignPermission',[AssignPermissionController::class,'index'])->name('AssignPermission');
-    Route::get('/AssignPermission/Add/{role_id}',[AssignPermissionController::class,'add'])->name('AssignPermission.add');
-    Route::post('/AssignPermission/save',[AssignPermissionController::class,'store'])->name('AssignPermission.save');
-    Route::get('/AssignPermission/Edit/{role_id}',[AssignPermissionController::class,'edit'])->name('AssignPermission.Edit');
-    Route::post('/AssignPermission/edit-save',[AssignPermissionController::class,'update'])->name('AssignPermission.edit-save');
-    Route::delete('/AssignPemission/Delete/{id}',[AssignPermissionController::class,'destroy'])->name('AssignPermission.delete');
+        // AssignPermission EndPoints
+        Route::get('/AssignPermission',[AssignPermissionController::class,'index'])->name('AssignPermission');
+        Route::get('/AssignPermission/Add/{role_id}',[AssignPermissionController::class,'add'])->name('AssignPermission.add');
+        Route::post('/AssignPermission/save',[AssignPermissionController::class,'store'])->name('AssignPermission.save');
+        Route::get('/AssignPermission/Edit/{role_id}',[AssignPermissionController::class,'edit'])->name('AssignPermission.Edit');
+        Route::post('/AssignPermission/edit-save',[AssignPermissionController::class,'update'])->name('AssignPermission.edit-save');
+        Route::delete('/AssignPemission/Delete/{id}',[AssignPermissionController::class,'destroy'])->name('AssignPermission.delete');
 
-    // Role EndPoints
-    Route::get('/AssignRole',[RoleController::class,'index'])->name('AssignRole');
-    Route::get('/AssignRole/Add',[RoleController::class,'create'])->name('AssignRole.Add');
-    Route::post('/AssignRole/save',[RoleController::class,'store'])->name('AssignRole.save');
-    Route::delete('AssignRole/delete/{id}',[RoleController::class,'destroy'])->name('AssignRole.delete');
+        // Role EndPoints
+        Route::get('/AssignRole',[RoleController::class,'index'])->name('AssignRole');
+        Route::get('/AssignRole/Add',[RoleController::class,'create'])->name('AssignRole.Add');
+        Route::post('/AssignRole/save',[RoleController::class,'store'])->name('AssignRole.save');
+        Route::delete('AssignRole/delete/{id}',[RoleController::class,'destroy'])->name('AssignRole.delete');
 
-    // Permission EndPoints
-    Route::get('/AddPermission',[PermissionController::class,'index'])->name('AddPermission');
-    Route::get('/AddPermission/Add',[PermissionController::class,'create'])->name('AddPermission.Add');
-    Route::post('/AddPermission/save',[PermissionController::class,'store'])->name('AddPermission.save');
-    Route::get('/AddPermission/edit/{id}',[PermissionController::class,'edit'])->name('AddPermission.edit');
-    Route::post('/AddPermission/edit-save',[PermissionController::class,'update'])->name('AddPermission.edit-save');
-    Route::delete('/AddPermission/delete/{id}',[PermissionController::class,'destroy'])->name('AddPermission.delete');
+        // Permission EndPoints
+        Route::get('/AddPermission',[PermissionController::class,'index'])->name('AddPermission');
+        Route::get('/AddPermission/Add',[PermissionController::class,'create'])->name('AddPermission.Add');
+        Route::post('/AddPermission/save',[PermissionController::class,'store'])->name('AddPermission.save');
+        Route::get('/AddPermission/edit/{id}',[PermissionController::class,'edit'])->name('AddPermission.edit');
+        Route::post('/AddPermission/edit-save',[PermissionController::class,'update'])->name('AddPermission.edit-save');
+        Route::delete('/AddPermission/delete/{id}',[PermissionController::class,'destroy'])->name('AddPermission.delete');
 
+        // Items EndPoints
+        Route::get('/AssignItem',[ItemsController::class,'index'])->name('AssignItem');
+        Route::get('/AssignItem/add',[ItemsController::class,'create'])->name('AssignItem.Add');
+        Route::post('AssignItem/save',[ItemsController::class,'store'])->name('AssignItem.save');
+        Route::get('/AssignItem/edit/{id}',[ItemsController::class,'edit'])->name('AssignItem.edit');
+        Route::post('/AssignItem/edit-save',[ItemsController::class,'update'])->name('AssignItem.edit-save');
+        Route::delete('/AssignItem/delete/{id}',[ItemsController::class,'destroy'])->name('AssignItem.delete');
 
-    // Items EndPoints
-    Route::get('/AssignItem',[ItemsController::class,'index'])->name('AssignItem');
-    Route::get('/AssignItem/add',[ItemsController::class,'create'])->name('AssignItem.Add');
-    Route::post('AssignItem/save',[ItemsController::class,'store'])->name('AssignItem.save');
-    Route::get('/AssignItem/edit/{id}',[ItemsController::class,'edit'])->name('AssignItem.edit');
-    Route::post('/AssignItem/edit-save',[ItemsController::class,'update'])->name('AssignItem.edit-save');
-    Route::delete('/AssignItem/delete/{id}',[ItemsController::class,'destroy'])->name('AssignItem.delete');
-
-    
-        // Route::group(['middleware' => ['EnsureAutherized'] ], function(){
-            // Post endpoints
-            Route::get('/Posts/add', [PostsController::class,'add'])->name('Posts.add');
-            Route::get('/Posts/edit/{id}',[PostsController::class,'edit'])->name('Posts.edit');
-            Route::delete('/Posts/delete/{id}',[PostsController::class,'destroy'])->name('Posts.delete');
-            
-            // comment endpoints
-            Route::post('Comments/save',[CommentsController::class,'store'])->name('Comments.save');
-            Route::get('/Comments/edit/{id}',[CommentsController::class,'edit'])->name('Comments.edit');
-            Route::delete('/Comments/delete/{id}',[CommentsController::class,'destroy'])->name('Comments.delete');
+        // Route::middleware([AssignRole::class])->group(function(){
+        // Post endpoints
+        Route::get('/Posts/add', [PostsController::class,'add'])->name('Posts.add');
         // });
+
+        Route::get('/Posts/edit/{id}',[PostsController::class,'edit'])->name('Posts.edit');
+        Route::delete('/Posts/delete/{id}',[PostsController::class,'destroy'])->name('Posts.delete');
+            
+        // comment endpoints
+        Route::post('Comments/save',[CommentsController::class,'store'])->name('Comments.save');
+        Route::get('/Comments/edit/{id}',[CommentsController::class,'edit'])->name('Comments.edit');
+        Route::delete('/Comments/delete/{id}',[CommentsController::class,'destroy'])->name('Comments.delete');
+        
               
-    // });
+    });
         
         // post endpoints
         Route::get('/Posts', [PostsController::class,'index'])->name('Posts');

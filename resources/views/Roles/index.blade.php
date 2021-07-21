@@ -21,17 +21,17 @@
                   <tr>
                       <td>{{ $roles->id }}</td>
                       <td>{{ $roles->name }}</td>
-                      <td>
+                      <td class="row">
                         <a href="{{ route('Admin.AssignPermission.add' ,$roles->id )}}">
                           <i class="fas fa-edit" aria-hidden="true"></i>
                         </a>
                         <form method="POST" action="{{ route('Admin.AssignRole.delete',$roles->id) }}">
                           @method('delete')
                           @csrf
-                          <button>
-                            <i class="fas fa-trash-alt"></i>
+                          
+                            <i class="fas fa-trash-alt" style="margin-left: 5px;"></i>
 
-                            </button>
+                            
                         </form>
                       </td>
                   </tr>    

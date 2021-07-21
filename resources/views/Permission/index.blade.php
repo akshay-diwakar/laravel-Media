@@ -21,9 +21,9 @@
                   <tr>
                     <td>{{ $Permissions->id }}</td>
                     <td>{{ $Permissions->name }}</td>
-                    <td>
+                    <td class="row">
                         <a href="{{URL('/Admin/AddPermission/edit/')}}/{{$Permissions->id}}">
-                            <button class="btn btn-dark">Edit</button>
+                            <button class="btn btn-dark" style="margin-right: 5px;">Edit</button>
                         </a>
                         <form method="POST" action="{{ route('Admin.AddPermission.delete' , $Permissions->id) }}">
                           @method('delete')

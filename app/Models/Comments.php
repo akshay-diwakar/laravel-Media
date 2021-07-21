@@ -16,5 +16,11 @@ class Comments extends Model
         return $this->belongsTo(Posts::class);
     }
 
+
+    public function User()
+    {
+        return $this->belongsTo(User::class,'user_id','id');
+    }
+
 }
 
