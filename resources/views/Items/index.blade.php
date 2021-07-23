@@ -21,16 +21,16 @@
                   <tr>
                       <td>{{ $items->id }}</td>
                       <td>{{ $items->name }}</td>
-                      <td>
+                      <td class="row">
                         <a href="{{ URL('/Admin/AssignItem/edit/')}}/{{$items->id}} ">
-                          <i class="fas fa-edit" aria-hidden="true"></i>
+                          <i class="fas fa-edit fa-2x" aria-hidden="true"></i>
                         </a>
                           <form method="POST" action="{{ route('Admin.AssignItem.delete',$items->id) }}">
                             @method('delete')
                             @csrf
-                            <button>
-                              <i class="far fa-trash-alt"></i>
-                            </button>
+                            
+                              <i class="far fa-trash-alt fa-2x"></i>
+                            
                           </form>
                       </td>
                   </tr>    

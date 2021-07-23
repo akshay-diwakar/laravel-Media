@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Validator;
 use Storage;
 use Auth;
+use App\Policies\PostPolicy;
+use Illuminate\Support\Facades\Gate;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\role;
@@ -18,10 +20,11 @@ class PostsController extends Controller
 
     public function index(Request $request)
     {
-        $Post = Post::get();
+        // dd(Auth::user()->id);
+        $post = Post::get();
         $User = User::get();
         $Comment = Comments::get();
-        return view('Posts.index',compact('Post','Comment'));
+        return view('Posts.index',compact('post','Comment'));
     }
 
     public function add(Request $request)
@@ -61,19 +64,21 @@ class PostsController extends Controller
         //    dd($form_data);
            $Posts = Post::create($form_data);
            // $Message = "successfully added";
-           return redirect('/Admin/Posts')->with('success',$Message);
+           return redirect('/Admin/Posts')->with('success');
         }   
     }
 
-      public function edit(Request $request)
+      public function edit(Request $request,Post $post)
       {
-         $Posts = Post::find($request->id);
+              
+          $Posts = Post::find($request->id);
+         
          return view('Posts.edit',compact('Posts'));
       }
 
 
       public function update(Request $request)
-        {
+      {
         $data = $request->all();
         // dd($data);
         $Post = Post::find($data['Post_id']);
@@ -90,30 +95,24 @@ class PostsController extends Controller
          }
          else{
             
-            // Generate a file name with extension
-         //    $ImageName = $request->postname . '.'.$request->Image->getClientOriginalExtension();
-             // dd($ImageName);
-         //    $request->Image->storeAs('Images', $ImageName);
             $path =   Storage::disk('local')->put('public',$request->file('Image'));
-           
-            
-             $form_data = array(
+            $form_data = array(
              'title' => @$data['postname'] ? $data['postname'] : $Post->title, 
              'description' => @$data['description'] ? $data['description'] : $Post->description,
               'Image' =>$path,  
-              );
+            );
 
-             $Post->update($form_data);
+            $Post->update($form_data);
              // $Message = "update successfully";
              return redirect('/Admin/Posts')->with('success');
-        }
-    }    
+            }
+      }    
 
     public function destroy($id)
     {
+             
         $Post = Post::findOrFail($id);
         $Post->delete();
-  
         return redirect()->back()->with('success');
     }
 

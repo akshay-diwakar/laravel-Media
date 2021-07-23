@@ -38,7 +38,7 @@
     </a>
        
     </div>
-   @foreach ($Post as $Posts)
+   @foreach ($post as $Posts)
 
     <div class="container" style="margin-top: 40px;">
       <div class="card">
@@ -46,22 +46,27 @@
                     {{-- user name --}}
                     <h2><b>{{ $Posts->user->name}}</b></h2>
                     <div style="margin-left:880px;" >
-                       <a href="{{URL('/Admin/Posts/edit/')}}/{{$Posts->id}}"> 
-                            <button class="btn btn-secondary" style="margin-bottom: 2px;">
-                                 edit
-                            </button> 
-                       </a>
-                       {{-- @if(auth()->users()->id == $Posts->user_id) --}}
-                            <form method="POST" action="{{ route('Admin.Posts.delete',$Posts->id) }}" style="margin-left:54px; margin-top:-38px;">
+                       
+                  
+                    <a href="{{URL('/Admin/Posts/edit/')}}/{{$Posts->id}}"> 
+                      <button class="btn btn-secondary" style="margin-bottom: 2px;">
+                        edit
+                      </button> 
+                    </a>
+                  
+
+                    
+                      <form method="POST" action="{{ route('Admin.Posts.delete',$Posts->id) }}" style="margin-left:54px; margin-top:-38px;">
                                 @method('Delete')
                                 @csrf
                                 <button class="btn btn-danger">
                                     Delete
                                 </button>
                             </form>
-                        {{-- @else --}}
-                            {{-- <button class="btn btn-primary" onclick="alert('you are not authorized person to delete it??')">Delete</button> --}}
-                     {{-- @endif --}}
+                             
+                       
+
+                         
                        
                     </div>
                     <h5 class="card-title">{{ $Posts->title}}</h5>
@@ -115,7 +120,7 @@
                                     @method('delete')
                                     @csrf   
                                     <div>
-                                        <button class="btn btn-danger">Delete</button>
+                                         <button class="btn btn-danger">Delete</button>
                                     </div>
                                 </form>     
                             </div>
@@ -123,12 +128,7 @@
                         </div>
                         @endforeach
                     </div> 
-                    
                 </div> 
-                
-
-                
-                    
       </div>
     </div>      
 @endforeach  

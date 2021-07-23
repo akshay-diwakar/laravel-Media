@@ -10,7 +10,10 @@ use App\Http\Controllers\AssignPermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RoleGivenController;
 
+
+use App\Http\Middleware\AdminRoleMiddleware;
 use App\Http\Middleware\AssignRole;
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +36,11 @@ Route::prefix('/Admin')->name('Admin.')->group(function () {
     Route::get('/',[HomeController::class,'index']);
 
     Route::group(['middleware' => 'auth'], function() {
+
+
+        // RoleAssignedtouser EndPoints
+        Route::get('/RolesGiven',[RoleGivenController::class,'index'])->name('RolesGiven');
+
         
         // users endpoint
         Route::get('/users',[UserController::class,'index'])->name('User');
@@ -83,7 +91,8 @@ Route::prefix('/Admin')->name('Admin.')->group(function () {
 
         Route::get('/Posts/edit/{id}',[PostsController::class,'edit'])->name('Posts.edit');
         Route::delete('/Posts/delete/{id}',[PostsController::class,'destroy'])->name('Posts.delete');
-            
+
+
         // comment endpoints
         Route::post('Comments/save',[CommentsController::class,'store'])->name('Comments.save');
         Route::get('/Comments/edit/{id}',[CommentsController::class,'edit'])->name('Comments.edit');

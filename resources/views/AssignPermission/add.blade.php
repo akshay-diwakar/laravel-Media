@@ -46,7 +46,7 @@
                 <tr class="Post">
                     <th scope="row">
                         <label>{{$item->name}}</label>
-                        <input type="hidden" name="Permissions[{{$item->name}}][id]" value="{{$item->id}}">
+                        <input type="hidden" name="Permissions[{{ $item->name }}][id]" value="{{$item->id}}">
                     </th>
                     @foreach ($Permissions as $Permission)
                         <td class="examplelink">
