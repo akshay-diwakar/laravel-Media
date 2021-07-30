@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\RoleUser;
 use App\Models\RolePermsission;
+use App\Models\Item_permission_role;
+use App\Models\Item;
 
 class role extends Model
 {
@@ -22,8 +24,14 @@ class role extends Model
     }
 
     
-    public function rolespermsission()
+    public function items()
     {
-       return $this->hasMany(RolePermission::class,'role_id');
+      return $this->belongsToMany(Item::class,'role_permissions','role_id','Item_id')->using(Item_permission_role::class);
     }
+
+    public function permissions()
+    {
+       return $this->belongsToMany(role::class,'role_permissions');
+    }
+
 }

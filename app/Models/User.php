@@ -65,10 +65,10 @@ class User extends Authenticatable
     }
        
 
-    public function rolepermission()
+    /*public function rolepermission()
     {
         return $this->hasOne(RolePermission::class);
-    }
+    }*/
 
 
     

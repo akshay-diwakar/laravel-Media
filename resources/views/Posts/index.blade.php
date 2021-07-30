@@ -36,7 +36,8 @@
                 Add Posts
         </button>
     </a>
-       
+     
+     
     </div>
    @foreach ($post as $Posts)
 
@@ -47,14 +48,12 @@
                     <h2><b>{{ $Posts->user->name}}</b></h2>
                     <div style="margin-left:880px;" >
                        
-                  
-                    <a href="{{URL('/Admin/Posts/edit/')}}/{{$Posts->id}}"> 
+                                   <a href="{{URL('/Admin/Posts/edit/')}}/{{$Posts->id}}"> 
                       <button class="btn btn-secondary" style="margin-bottom: 2px;">
                         edit
                       </button> 
                     </a>
                   
-
                     
                       <form method="POST" action="{{ route('Admin.Posts.delete',$Posts->id) }}" style="margin-left:54px; margin-top:-38px;">
                                 @method('Delete')
@@ -64,7 +63,8 @@
                                 </button>
                             </form>
                              
-                       
+                    
+               
 
                          
                        

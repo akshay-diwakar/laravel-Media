@@ -16,8 +16,8 @@ class AssignPermissionController extends Controller
     public function index(Request $request)
     {
         $Role = role::get();
-        $RolePermission  = RolePermission::get();
-        return view('AssignPermission.index',compact('RolePermission','Role'));
+        
+        return view('AssignPermission.index',compact('Role'));
     }
 
     public function add($Role_id,Request $request)
