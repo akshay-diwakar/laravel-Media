@@ -23,6 +23,8 @@ class CheckPermission
      * @return mixed
      */
     public function handle(Request $request, Closure $next,$Item_name,$Permission)
+    
+
     {
         $RoleUser = RoleUser::where('user_id','=',Auth::id())->select('user_id','role_id')->get();
         // dd($RoleUser);             

@@ -84,7 +84,7 @@ Route::prefix('/Admin')->name('Admin.')->group(function () {
         Route::delete('/AssignItem/delete/{id}',[ItemsController::class,'destroy'])->name('AssignItem.delete');
 
         Route::get('/Posts/add', [PostsController::class,'add'])->name('Posts.add')->middleware('CheckPermission:Post,Add');
-        Route::get('/Posts/edit/{id}',[PostsController::class,'edit'])->name('Posts.edit')->middleware('CheckPermission:Post,Edit');
+        Route::get('/Posts/edit/{id}',[PostsController::class,'edit'])->name('Posts.edit')->middleware('CheckPermission:Posts,Edit');
         Route::delete('/Posts/delete/{id}',[PostsController::class,'destroy'])->name('Posts.delete')->middleware('CheckPermission:Post,Delete');
 
         // comment endpoints
