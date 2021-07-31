@@ -88,7 +88,7 @@ Route::prefix('/Admin')->name('Admin.')->group(function () {
         Route::delete('/Posts/delete/{id}',[PostsController::class,'destroy'])->name('Posts.delete')->middleware('CheckPermission:Post,Delete');
 
         // comment endpoints
-        Route::post('{Post_id}/Comments/save',[CommentsController::class,'store'])->name('Comments.save');
+        Route::post('/Comments/save/{slug}/{Post_id}',[CommentsController::class,'store'])->name('Comments.save');
         Route::get('/Comments/edit/{id}',[CommentsController::class,'edit'])->name('Comments.edit')->middleware('CheckPermission:Comment,Edit');
         Route::delete('/Comments/delete/{id}',[CommentsController::class,'destroy'])->name('Comments.delete')
                         ->middleware('CheckPermission:Comment,Delete');
@@ -98,7 +98,7 @@ Route::prefix('/Admin')->name('Admin.')->group(function () {
         
         // post endpoints
         Route::get('/Posts', [PostsController::class,'ShowAllPost'])->name('Posts.DashBoard');
-        Route::get('/Posts/{Post_id}',[PostsController::class,'index'])->name('Post.detail');
+        Route::get('/Posts/{slug}/{Post_id}',[PostsController::class,'index'])->name('Post.detail');
         Route::post('/Posts/save',[PostsController::class,'store'])->name('Posts.save');
         Route::post('/Posts/edit-save',[PostsController::class,'update'])->name('Posts.edit-save');
 

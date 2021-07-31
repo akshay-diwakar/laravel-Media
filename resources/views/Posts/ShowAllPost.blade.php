@@ -31,12 +31,12 @@
    	  		<h3>
    	  			<b>{{ $Posts->user->name }}</b>
    	  		</h3>
-           	<a href="{{ url('/Admin/Posts/'. $Posts->id) }}">
+           	<a href="{{ url('/Admin/Posts/'.Str::slug($Posts->title).'/' .$Posts->id) }}">
            		<img class="card-img-bottom" src="{{ Storage::url($Posts->Image)}}">
            </a>		
            	
            	<div class="card-body">
-           		<a href="{{ url('/Admin/Posts/'. $Posts->id) }}"><b>{{ $Posts->title }}</b></a>
+           		<a href="{{ url('/Admin/Posts/'.Str::slug($Posts->title).'/'.$Posts->id) }}"><b>{{ $Posts->title }}</b></a>
            	</div>
    	  			
    	  	@endforeach

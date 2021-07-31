@@ -21,17 +21,17 @@ class PostsController extends Controller
        return view('Posts.ShowAllPost',compact('Post'));
     }
 
-    public function index(Request $request,$Post_id)
+    public function index(Request $request,$slug,$Post_id)
     {
 
-       $Detail = Post::with('User')->findOrFail($Post_id);
-       // dd($Detail->User);
+       $Detail = Post::with('User')->find($Post_id);
+       // dd($Detail);
        // echo '<pre>' ;
        // print_r($Detail);
        // die;
 
-
-       return view('Posts.index',compact('Detail'));
+       $Comment = Comment::get();
+       return view('Posts.index',compact('Detail','Comment'));
     }
 
     public function add(Request $request)

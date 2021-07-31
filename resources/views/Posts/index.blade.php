@@ -24,7 +24,7 @@
         <div class="card-body">
           {{-- user name --}}
             <h1>{{ $Detail->User->name }}</h1>
-            <label>{{ $Detail->title }}</label>
+            
                   <div style="margin-left:880px;" >
                         <a href="{{URL('/Admin/Posts/edit/')}}/{{$Detail->id}}"> 
                             <button class="btn btn-secondary" style="margin-bottom:2px;">
@@ -49,13 +49,52 @@
                       {{ $Detail->created_at}}
                      </small>
                 </label>
+          </div>
+    </div>
 
+    <!-- Add Comment -->
+    <div class="container"> 
+     <div class="card my-3">
+       <h5 class="card-header">Add Comment</h5>
+        <div class="card-body">
+            <form method="POST" action="{{ url('/Admin/Comments/save/'.Str::slug($Detail->title).'/'.$Detail->id) }}">
+            @csrf
+                <input type="text" name="comment" class="form-control"> </textarea>
+                <input type="submit" class="btn btn-dark mt-2" />
+            </form>
+          </div>
+        </div>       
+    </div>
 
-                
-                
-                 
-      </div>
-    </div>      
+    <!-- Fetch Comments -->
+        <div class="card my-4">
+          <h5 class="card-header">Comments <span class="badge badge-dark">{{count($Comment)}}</span></h5>
+          <div class="card-body">
+            @foreach($Comment as $Comments)
+                <blockquote class="blockquote">
+                  <p class="mb-0">{{ $Comments->name }}</p>
+                  
+                  <footer class="blockquote-footer">{{ $Comments->User->name }}</footer>
+                  <div style="margin-left:70%;" class="row">
+                      <div style="margin-right:10px;">
+                          <a href="{{ URL('/Admin/Comments/edit')}}/{{$Comments->id}}"> 
+                              <button class="btn btn-secondary">edit</button> 
+                          </a>
+                      </div> 
+                      <form method="POST" action="{{ route('Admin.Comments.delete',$Comments->id)}}">
+                      @method('delete')
+                      @csrf   
+                      <div>
+                          <button class="btn btn-danger">Delete</button>
+                        </div>
+                      </form>     
+                  </div>
+                </blockquote>
+                <hr/>
+            @endforeach   
+          </div>
+        </div>
+     
    
 </div> 
 @endsection
