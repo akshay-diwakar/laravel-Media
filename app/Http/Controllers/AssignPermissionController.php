@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Input;
@@ -28,7 +27,6 @@ class AssignPermissionController extends Controller
             foreach($item_data as $item){
                     $data = $item->name;
             }
-
             return $data.$role->permission_id;
         })->toArray();
 

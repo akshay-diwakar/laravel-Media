@@ -13,8 +13,8 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleGivenController;
 
 
-use App\Http\Middleware\AdminRoleMiddleware;
-use App\Http\Middleware\AssignRole;
+use App\Http\Middleware\CheckPermission;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -84,11 +84,11 @@ Route::prefix('/Admin')->name('Admin.')->group(function () {
         Route::delete('/AssignItem/delete/{id}',[ItemsController::class,'destroy'])->name('AssignItem.delete');
 
         Route::get('/Posts/add', [PostsController::class,'add'])->name('Posts.add')->middleware('CheckPermission:Post,Add');
-        Route::get('/Posts/edit/{id}',[PostsController::class,'edit'])->name('Posts.edit')->middleware('CheckPermission:Posts,Edit');
+        Route::get('/Posts/edit/{id}',[PostsController::class,'edit'])->name('Posts.edit')->middleware('CheckPermission:Post,Edit');
         Route::delete('/Posts/delete/{id}',[PostsController::class,'destroy'])->name('Posts.delete')->middleware('CheckPermission:Post,Delete');
 
         // comment endpoints
-        Route::post('Comments/save',[CommentsController::class,'store'])->name('Comments.save');
+        Route::post('{Post_id}/Comments/save',[CommentsController::class,'store'])->name('Comments.save');
         Route::get('/Comments/edit/{id}',[CommentsController::class,'edit'])->name('Comments.edit')->middleware('CheckPermission:Comment,Edit');
         Route::delete('/Comments/delete/{id}',[CommentsController::class,'destroy'])->name('Comments.delete')
                         ->middleware('CheckPermission:Comment,Delete');
@@ -97,7 +97,8 @@ Route::prefix('/Admin')->name('Admin.')->group(function () {
     });
         
         // post endpoints
-        Route::get('/Posts', [PostsController::class,'index'])->name('Posts');
+        Route::get('/Posts', [PostsController::class,'ShowAllPost'])->name('Posts.DashBoard');
+        Route::get('/Posts/{Post_id}',[PostsController::class,'index'])->name('Post.detail');
         Route::post('/Posts/save',[PostsController::class,'store'])->name('Posts.save');
         Route::post('/Posts/edit-save',[PostsController::class,'update'])->name('Posts.edit-save');
 

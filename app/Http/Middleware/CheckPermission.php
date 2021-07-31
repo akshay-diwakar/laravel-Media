@@ -27,23 +27,19 @@ class CheckPermission
 
     {
         $RoleUser = RoleUser::where('user_id','=',Auth::id())->select('user_id','role_id')->get();
-        // dd($RoleUser);             
-        
         $AssignedRole = $RoleUser->pluck('role_id');
-
         $Item = Item::where('name',$Item_name)->first();
-
         $permission_arr = RolePermission::
                                   where('role_id',$AssignedRole)
                                 ->where('Item_id',$Item->id)
                                 ->pluck('permission_id')
                                 ->toArray();  
-
-                            
+        if ($Item == null) {
+            abort(404);
+        }                       
         if (empty($permission_arr)) {
              abort(403);
         }                        
-
         if (!$this->check_permission($permission_arr, $Permission)) {
             abort(404);
         } 
@@ -51,8 +47,6 @@ class CheckPermission
         {
             return $next($request);
         }
-
-        
     }
 
    protected function check_permission($permission_arr,$Permission)

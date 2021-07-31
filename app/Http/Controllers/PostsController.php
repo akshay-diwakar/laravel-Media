@@ -6,27 +6,32 @@ use Illuminate\Http\Request;
 use Validator;
 use Storage;
 use Auth;
-use DB;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\role;
-use App\Models\Comments;
-use App\Models\Item;
-use App\ModelS\Permission;
-use App\Models\RolePermission;  
-use App\Models\RoleUser;
+use App\Models\Comment;
 
 class PostsController extends Controller
 {
     
 
-    public function index(Request $request)
+    public function ShowAllPost(Request $request)
     {
-       
-       $post = Post::get();
-       $Comment = Comments::get();
-       
-       return view('Posts.index',compact('post','Comment'));
+       $Post = Post::paginate(3);
+       return view('Posts.ShowAllPost',compact('Post'));
+    }
+
+    public function index(Request $request,$Post_id)
+    {
+
+       $Detail = Post::with('User')->findOrFail($Post_id);
+       // dd($Detail->User);
+       // echo '<pre>' ;
+       // print_r($Detail);
+       // die;
+
+
+       return view('Posts.index',compact('Detail'));
     }
 
     public function add(Request $request)
@@ -105,8 +110,8 @@ class PostsController extends Controller
             );
 
             $Post->update($form_data);
-             // $Message = "update successfully";
-             return redirect('/Admin/Posts')->with('success');
+            
+            return redirect('/Admin/Posts')->with('success');
             }
       }    
 
