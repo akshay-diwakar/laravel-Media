@@ -83,15 +83,14 @@ Route::prefix('/Admin')->name('Admin.')->group(function () {
         Route::post('/AssignItem/edit-save',[ItemsController::class,'update'])->name('AssignItem.edit-save');
         Route::delete('/AssignItem/delete/{id}',[ItemsController::class,'destroy'])->name('AssignItem.delete');
 
-        Route::get('/Posts/add', [PostsController::class,'add'])->name('Posts.add')->middleware('CheckPermission:Post,Add');
-        Route::get('/Posts/edit/{id}',[PostsController::class,'edit'])->name('Posts.edit')->middleware('CheckPermission:Post,Edit');
-        Route::delete('/Posts/delete/{id}',[PostsController::class,'destroy'])->name('Posts.delete')->middleware('CheckPermission:Post,Delete');
+        Route::get('/Posts/add', [PostsController::class,'add'])->name('Posts.add');
+        Route::get('/Posts/edit/{id}',[PostsController::class,'edit'])->name('Posts.edit');
+        Route::delete('/Posts/delete/{id}',[PostsController::class,'destroy'])->name('Posts.delete');
 
         // comment endpoints
         Route::post('/Comments/save/{slug}/{Post_id}',[CommentsController::class,'store'])->name('Comments.save');
-        Route::get('/Comments/edit/{id}',[CommentsController::class,'edit'])->name('Comments.edit')->middleware('CheckPermission:Comment,Edit');
-        Route::delete('/Comments/delete/{id}',[CommentsController::class,'destroy'])->name('Comments.delete')
-                        ->middleware('CheckPermission:Comment,Delete');
+        Route::get('/Comments/edit/{id}',[CommentsController::class,'edit'])->name('Comments.edit');
+        Route::delete('/Comments/delete/{id}',[CommentsController::class,'destroy'])->name('Comments.delete');
         
               
     });

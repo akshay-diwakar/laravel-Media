@@ -13,7 +13,6 @@ use App\Models\role;
 use App\Models\RoleUser;
 use App\Models\RolePermission;
 
-
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;

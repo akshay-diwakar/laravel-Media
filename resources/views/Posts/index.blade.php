@@ -16,10 +16,17 @@
 </div>
 @endif
 
+
 @section('content')
 <div class="container" style="margin-top:20px;">
-   
-    <div class="container" style="margin-top: 40px;">
+
+@if ($message = Session::get('error'))
+<div class="alert alert-danger alert-block">
+  <button type="button" class="close" data-dismiss="alert">×</button> 
+        <strong>{{ $message }}</strong>
+</div>
+@endif   
+    <div class="container" style="margin-top:40px;">
       <div class="card">
         <div class="card-body">
           {{-- user name --}}
@@ -31,7 +38,7 @@
                               edit
                             </button> 
                         </a>
-                        <form method="POST" action="{{ route('Admin.Posts.delete',$Detail->id) }}" style="margin-left:54px; margin-top:-38px;">
+                      <form method="POST" action="{{ route('Admin.Posts.delete',$Detail->id) }}" style="margin-left:54px; margin-top:-38px;">
                                     @method('Delete')
                                     @csrf
                                     <button class="btn btn-danger">

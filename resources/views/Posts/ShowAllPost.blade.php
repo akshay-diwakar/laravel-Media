@@ -26,7 +26,6 @@
        </a>
     </div>
    	<div class="card col-md-3" style="margin-top: 20px;">
-   	  	
    	  	@foreach($Post as $Posts)
    	  		<h3>
    	  			<b>{{ $Posts->user->name }}</b>
@@ -34,11 +33,9 @@
            	<a href="{{ url('/Admin/Posts/'.Str::slug($Posts->title).'/' .$Posts->id) }}">
            		<img class="card-img-bottom" src="{{ Storage::url($Posts->Image)}}">
            </a>		
-           	
-           	<div class="card-body">
+           <div class="card-body">
            		<a href="{{ url('/Admin/Posts/'.Str::slug($Posts->title).'/'.$Posts->id) }}"><b>{{ $Posts->title }}</b></a>
-           	</div>
-   	  			
+           </div>
    	  	@endforeach
 
    	  	<div class="d-flex justify-content-left">

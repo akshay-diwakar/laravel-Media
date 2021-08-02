@@ -15,7 +15,7 @@ class Post extends Model
         'description',
         'Image',
         'user_id',
-        ];
+    ];
     
     public function comments()
     {

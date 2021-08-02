@@ -49,8 +49,18 @@ class CommentsController extends Controller
 
     public function edit(Request $request)
     {
-       $Comment = Comments::find($request->id);
-       return view('Comments.edit',compact('Comment'));
+        $Comment = Comments::find($request->id);
+        
+        $User_id = $Comment->user_id;
+        if ($User_id != Auth::id()){
+            // abort('you are not authorized');
+            $message = 'you are not authorized to do that';
+            return $message;
+        }
+        else{
+            return view('Comments.edit',compact('Comment'));
+           
+        } 
     }
 
     public function update(Request $request)
@@ -80,8 +90,19 @@ class CommentsController extends Controller
 
     public function destroy($id)
     {
-        $Comment = Comments::findOrFail($id);
-        $Comment->delete();
-        return redirect()->back()->with('success');
-    }    
+
+      $Comment = Comments::findOrFail($id);
+    
+      $User_id = $Comment->user_id;
+      if ($User_id != Auth::id()){
+         // abort('you are not authorized');
+        $message = 'you are not authorized to do that';
+          return $message;
+      }
+      else{
+          $Comment->delete();
+          return redirect()->back()->with('success');
+       }
+     }
+        
 }

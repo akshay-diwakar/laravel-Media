@@ -23,23 +23,26 @@ class CheckPermission
      * @return mixed
      */
     public function handle(Request $request, Closure $next,$Item_name,$Permission)
-    
-
     {
         $RoleUser = RoleUser::where('user_id','=',Auth::id())->select('user_id','role_id')->get();
+
         $AssignedRole = $RoleUser->pluck('role_id');
+
         $Item = Item::where('name',$Item_name)->first();
+        
         $permission_arr = RolePermission::
                                   where('role_id',$AssignedRole)
                                 ->where('Item_id',$Item->id)
                                 ->pluck('permission_id')
                                 ->toArray();  
         if ($Item == null) {
-            abort(404);
-        }                       
+            abort(403,'Their is nothing similar to this');
+        }
+
         if (empty($permission_arr)) {
-             abort(403);
-        }                        
+             abort(403,'you are not authorrized to do this');
+        }
+        
         if (!$this->check_permission($permission_arr, $Permission)) {
             abort(404);
         } 
