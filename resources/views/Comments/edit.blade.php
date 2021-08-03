@@ -29,24 +29,22 @@
 @section('content')
 <div class="container" style="margin-top: 20px;">
     
-    @foreach ($Post as $Posts)
-      <div class="container" style="margin-top: 40px;">
-        <div class="card">
-                  {{-- comments section --}}
-               <div id="myDIV" style="margin-top: 20px;" class="col-md-6">
-                  <form action="{{ route('Admin.Comments.edit-save')}}" method="POST">
-                    <input type="hidden" name="Comment_id" value="{{$Comment->id}}" />
-                        @csrf
-                        <div class="form-group">
-                            <label>Comment</label>
-                            <input type="text" value="{{$Comment->comment}}" class="form-control" placeholder="Comment" name="comment">
-                        </div>
-                            <input type="submit" class="form-control col-md-3 btn btn-info" value="add"> 
-                   </form>
+       <div class="container" style="margin-top: 40px;">
+          <div class="card">
+              <div style="margin-top: 20px" class="col-md-6">
+                  <form action="{{ route('Admin.Comments.edit-save') }}" method="POST">
+                      <input type="hidden" name="Comment_id" value="{{$Comment->id}}">
+                      @csrf
+                      <div class="form-group">
+                          <label>Comment</label>
+                          <input type="text" value="{{ $Comment->name }}" name="Comment" placeholder="Comment" class="form-control">
+                      </div>
+                          <input type="submit" class="form-control col-md-3 btn btn-info" name="add">
+                  </form>
               </div>
-        </div>
-      </div>      
-    @endforeach  
+          </div>
+       </div>
+    
 </div>    
 @endsection
 

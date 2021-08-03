@@ -40,8 +40,7 @@ class CommentsController extends Controller
                 'name' => $data['comment'], 
                 'user_id' => $User,
                 'post_id' => $Post_id,
-             );
-
+            );
             $Comment = Comment::create($form_data);
             return redirect('/Admin/Posts/'. $slug . '/' . $Post_id)->with('success');
          }
@@ -49,27 +48,24 @@ class CommentsController extends Controller
 
     public function edit(Request $request)
     {
-        $Comment = Comments::find($request->id);
-        
+        $Comment = Comment::findOrFail($request->id);
         $User_id = $Comment->user_id;
+        
         if ($User_id != Auth::id()){
-            // abort('you are not authorized');
             $message = 'you are not authorized to do that';
             return $message;
         }
         else{
             return view('Comments.edit',compact('Comment'));
-           
         } 
     }
 
     public function update(Request $request)
     {
         $data = $request->all();
-        
-        $Comment = Comments::find($data['Comment_id']);
+        $Comment = Comment::find($data['Comment_id']);
         $rules = array(
-            'comment' => 'required' ,
+            'Comment' => 'required' ,
         );
 
         $validate=Validator::make($data,$rules);
@@ -79,19 +75,19 @@ class CommentsController extends Controller
         }
         else{
             $form_data = array(
-             'comment' => @$data['comment'] ? $data['comment'] : $Post->comment, 
+             'name' => @$data['Comment'] ? $data['Comment'] : $Comment->name, 
             );
 
-             $Comment->update($form_data);
-             // $Message = "update successfully";
-             return redirect('/Posts')->with('success');
+            $Comment->update($form_data);
+            // $Message = "update successfully";
+            return redirect()->route('Post.detail')->with('success');
         }
     }
 
     public function destroy($id)
     {
 
-      $Comment = Comments::findOrFail($id);
+      $Comment = Comment::findOrFail($id);
     
       $User_id = $Comment->user_id;
       if ($User_id != Auth::id()){
